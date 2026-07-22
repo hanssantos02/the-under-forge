@@ -15,3 +15,6 @@ shape = SubResource("RectangleShape2D_6baej")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1574654748]
 texture = ExtResource("1_3vyb7")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1453979205]
+zoom = Vector2(2, 2)
