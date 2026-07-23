@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bi18c06iqljql" path="res://scenes/health_component.tscn" id="3_qhqgy"]
 [ext_resource type="Script" uid="uid://dk0pm2wxsp0cl" path="res://scripts/weapon.gd" id="4_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://bis8auo2hkqwq" path="res://sprites/weapon.png" id="5_qlg0r"]
+[ext_resource type="PackedScene" uid="uid://co5ocd4hvs1d4" path="res://scenes/projectile.tscn" id="5_tuyoq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6baej"]
 size = Vector2(12, 8)
@@ -27,9 +28,18 @@ zoom = Vector2(2, 2)
 
 [node name="WeaponPivot" type="Node2D" parent="." unique_id=1102760210]
 script = ExtResource("4_qlg0r")
+projectile_scene = ExtResource("5_tuyoq")
 
 [node name="WeaponSprite" type="Sprite2D" parent="WeaponPivot" unique_id=142814430]
 position = Vector2(15, 0)
 texture = ExtResource("5_qlg0r")
 
+[node name="MuzzlePoint" type="Marker2D" parent="WeaponPivot/WeaponSprite" unique_id=251759707]
+position = Vector2(7, 0)
+
+[node name="Timer" type="Timer" parent="WeaponPivot" unique_id=444348784]
+wait_time = 0.5
+autostart = true
+
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
+[connection signal="timeout" from="WeaponPivot/Timer" to="WeaponPivot" method="_on_timer_timeout"]
