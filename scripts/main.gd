@@ -4,7 +4,6 @@ extends Node2D
 var is_respawning: bool = false
 
 func _on_player_died() -> void:
-	print("This is working")
 	is_respawning = true
 	
 func _unhandled_input(event: InputEvent) -> void:
