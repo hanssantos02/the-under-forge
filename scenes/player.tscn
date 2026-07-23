@@ -3,6 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://cmwjaje5htdd" path="res://sprites/player_idle.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://dfo7a6rqb8o82" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="PackedScene" uid="uid://bi18c06iqljql" path="res://scenes/health_component.tscn" id="3_qhqgy"]
+[ext_resource type="Script" uid="uid://dk0pm2wxsp0cl" path="res://scripts/weapon.gd" id="4_qlg0r"]
+[ext_resource type="Texture2D" uid="uid://dem2ydqo5iv0" path="res://icon.svg" id="5_tuyoq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6baej"]
 size = Vector2(12, 8)
@@ -22,5 +24,13 @@ texture = ExtResource("1_3vyb7")
 zoom = Vector2(2, 2)
 
 [node name="HealthComponent" parent="." unique_id=1323311277 instance=ExtResource("3_qhqgy")]
+
+[node name="WeaponPivot" type="Node2D" parent="." unique_id=1102760210]
+script = ExtResource("4_qlg0r")
+
+[node name="WeaponSprite" type="Sprite2D" parent="WeaponPivot" unique_id=142814430]
+position = Vector2(15, 0)
+scale = Vector2(0.046875, 0.046875)
+texture = ExtResource("5_tuyoq")
 
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
