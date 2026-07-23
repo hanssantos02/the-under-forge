@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://dk0pm2wxsp0cl" path="res://scripts/weapon.gd" id="4_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://bis8auo2hkqwq" path="res://sprites/weapon.png" id="5_qlg0r"]
 [ext_resource type="PackedScene" uid="uid://co5ocd4hvs1d4" path="res://scenes/projectile.tscn" id="5_tuyoq"]
+[ext_resource type="Resource" uid="uid://befod76iap02p" path="res://resources/base_weapon.tres" id="6_fjrip"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6baej"]
 size = Vector2(12, 8)
@@ -29,6 +30,7 @@ zoom = Vector2(2, 2)
 [node name="WeaponPivot" type="Node2D" parent="." unique_id=1102760210]
 script = ExtResource("4_qlg0r")
 projectile_scene = ExtResource("5_tuyoq")
+stats = ExtResource("6_fjrip")
 
 [node name="WeaponSprite" type="Sprite2D" parent="WeaponPivot" unique_id=142814430]
 position = Vector2(15, 0)
