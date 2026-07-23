@@ -41,9 +41,9 @@ texture = ExtResource("5_qlg0r")
 [node name="MuzzlePoint" type="Marker2D" parent="WeaponPivot/WeaponSprite" unique_id=251759707]
 position = Vector2(7, 0)
 
-[node name="Timer" type="Timer" parent="WeaponPivot" unique_id=444348784]
+[node name="WeaponTimer" type="Timer" parent="WeaponPivot" unique_id=444348784]
 wait_time = 0.5
 autostart = true
 
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
-[connection signal="timeout" from="WeaponPivot/Timer" to="WeaponPivot" method="_on_timer_timeout"]
+[connection signal="timeout" from="WeaponPivot/WeaponTimer" to="WeaponPivot" method="_on_timer_timeout"]
