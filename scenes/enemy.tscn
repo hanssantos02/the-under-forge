@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://brye3pkbkraip" path="res://scenes/death_explosion.tscn" id="2_c4w8v"]
 [ext_resource type="PackedScene" uid="uid://bi18c06iqljql" path="res://scenes/health_component.tscn" id="3_4ra3w"]
 [ext_resource type="PackedScene" uid="uid://c62w87grwbrgy" path="res://scenes/hitbox_component.tscn" id="4_5uy6h"]
+[ext_resource type="PackedScene" uid="uid://cfvyubwjo2md2" path="res://scenes/movement_animator.tscn" id="6_xwavj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6baej"]
 size = Vector2(10, 8)
@@ -40,6 +41,10 @@ collision_layer = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=1861527045]
 position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_uu65c")
+
+[node name="MovementAnimator" parent="." unique_id=853006593 node_paths=PackedStringArray("sprite", "character") instance=ExtResource("6_xwavj")]
+sprite = NodePath("../Sprite2D")
+character = NodePath("..")
 
 [connection signal="damaged" from="HealthComponent" to="." method="_on_damaged"]
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]

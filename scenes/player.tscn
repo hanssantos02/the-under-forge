@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bis8auo2hkqwq" path="res://sprites/weapon.png" id="5_qlg0r"]
 [ext_resource type="PackedScene" uid="uid://co5ocd4hvs1d4" path="res://scenes/projectile.tscn" id="5_tuyoq"]
 [ext_resource type="Resource" uid="uid://befod76iap02p" path="res://resources/base_weapon.tres" id="6_fjrip"]
+[ext_resource type="PackedScene" uid="uid://cfvyubwjo2md2" path="res://scenes/movement_animator.tscn" id="10_y4r1p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6baej"]
 size = Vector2(12, 8)
@@ -46,6 +47,10 @@ position = Vector2(7, 0)
 [node name="WeaponTimer" type="Timer" parent="WeaponPivot" unique_id=444348784]
 wait_time = 0.5
 autostart = true
+
+[node name="MovementAnimator" parent="." unique_id=853006593 node_paths=PackedStringArray("sprite", "character") instance=ExtResource("10_y4r1p")]
+sprite = NodePath("../Sprite2D")
+character = NodePath("..")
 
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="timeout" from="WeaponPivot/WeaponTimer" to="WeaponPivot" method="_on_timer_timeout"]
