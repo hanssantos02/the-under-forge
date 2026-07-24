@@ -3,17 +3,20 @@ extends Node2D
 @export var player_scene: PackedScene
 @export var enemy_scene: PackedScene
 @onready var spawn_location: PathFollow2D = $SpawnPath/SpawnLocation
+@onready var spawn_timer: Timer = $SpawnTimer
 var is_respawning: bool = false
 
 func _on_player_died() -> void:
 	is_respawning = true
+	spawn_timer.stop()
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if is_respawning and event.is_action_pressed("ui_accept"):
 		is_respawning = false
+		spawn_timer.start()
 		var player = player_scene.instantiate()
 		player.global_position = Vector2.ZERO
-		player.starts_with_weapon = false
+		player.has_weapon = false
 		get_tree().current_scene.add_child(player)
 		player.add_to_group("player")
 		player.tree_exited.connect(_on_player_died)

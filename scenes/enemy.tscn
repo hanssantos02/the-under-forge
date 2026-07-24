@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://g1drn400gekt" path="res://sprites/enemy.png" id="1_7p1mj"]
 [ext_resource type="Script" uid="uid://mh1d3fhpfdbb" path="res://scripts/enemy.gd" id="1_md0e3"]
+[ext_resource type="PackedScene" uid="uid://brye3pkbkraip" path="res://scenes/death_explosion.tscn" id="2_c4w8v"]
 [ext_resource type="PackedScene" uid="uid://bi18c06iqljql" path="res://scenes/health_component.tscn" id="3_4ra3w"]
 [ext_resource type="PackedScene" uid="uid://c62w87grwbrgy" path="res://scenes/hitbox_component.tscn" id="4_5uy6h"]
 
@@ -14,9 +15,18 @@ size = Vector2(12, 10)
 [node name="Enemy" type="CharacterBody2D" unique_id=106604056]
 collision_layer = 2
 script = ExtResource("1_md0e3")
+explosion_scene = ExtResource("2_c4w8v")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=941818271]
+clip_children = 2
 texture = ExtResource("1_7p1mj")
+
+[node name="FlashRect" type="ColorRect" parent="Sprite2D" unique_id=176016089]
+modulate = Color(1, 1, 1, 0)
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=390280680]
 position = Vector2(0, -3)
@@ -31,4 +41,5 @@ collision_layer = 0
 position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_uu65c")
 
+[connection signal="damaged" from="HealthComponent" to="." method="_on_damaged"]
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]

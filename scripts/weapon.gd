@@ -4,6 +4,7 @@ extends Node2D
 @export var stats: WeaponStats
 @onready var muzzle_point: Marker2D = $WeaponSprite/MuzzlePoint
 @onready var weapon_timer: Timer = $WeaponTimer
+@onready var camera_2d: Camera2D = $"../Camera2D"
 
 
 func _ready() -> void:
@@ -19,4 +20,5 @@ func _on_timer_timeout() -> void:
 	projectile.damage = stats.damage
 	projectile.global_position = muzzle_point.global_position
 	projectile.global_rotation = global_rotation
+	camera_2d.apply_shake(0.5)
 	get_tree().current_scene.add_child(projectile)
