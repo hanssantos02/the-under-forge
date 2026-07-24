@@ -7,9 +7,11 @@
 size = Vector2(14, 7)
 
 [node name="DroppedWeapon" type="Area2D" unique_id=1573558440]
+rotation = -0.7853982
 script = ExtResource("1_qd357")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=819940746]
+modulate = Color(1.8247963, 1.8247963, 1.8247963, 1)
 texture = ExtResource("2_us8y3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=938629176]
