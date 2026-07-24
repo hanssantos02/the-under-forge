@@ -15,5 +15,5 @@ func _process(delta: float) -> void:
 		sprite.position.y = abs(wave) * -hop_height
 	else:
 		time_passed = 0.0
-		sprite.rotation = lerpf(sprite.rotation, 0.0, 1.0)
-		sprite.position.y = lerpf(sprite.position.y, 0.0, 1.0)
+		sprite.rotation = lerpf(sprite.rotation, 0.0, 10.0 * delta)
+		sprite.position.y = lerpf(sprite.position.y, 0.0, 10.0 * delta)
