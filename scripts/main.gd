@@ -1,6 +1,8 @@
 extends Node2D
 
 @export var player_scene: PackedScene
+@export var enemy_scene: PackedScene
+@onready var spawn_location: PathFollow2D = $SpawnPath/SpawnLocation
 var is_respawning: bool = false
 
 func _on_player_died() -> void:
@@ -15,3 +17,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_tree().current_scene.add_child(player)
 		player.add_to_group("player")
 		player.tree_exited.connect(_on_player_died)
+
+func _on_spawn_timer_timeout() -> void:
+	var spawn = randf_range(0.0, 1.0)
+	spawn_location.progress_ratio = spawn
+	var new_enemy = enemy_scene.instantiate()
+	new_enemy.global_position = spawn_location.global_position
+	get_tree().current_scene.add_child(new_enemy)
+	new_enemy.add_to_group("enemy")
