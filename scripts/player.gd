@@ -24,10 +24,11 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 func _on_health_component_died() -> void:
-	var weapon = dropped_weapon_scene.instantiate()
-	weapon.stats = weapon_pivot.stats
-	weapon.global_position = global_position
-	get_tree().current_scene.add_child(weapon)
-	camera_2d.reparent(weapon)
+	if starts_with_weapon:
+		var weapon = dropped_weapon_scene.instantiate()
+		weapon.stats = weapon_pivot.stats
+		weapon.global_position = global_position
+		get_tree().current_scene.add_child(weapon)
+		camera_2d.reparent(weapon)
 	queue_free()
 	

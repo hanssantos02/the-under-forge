@@ -3,25 +3,24 @@
 [ext_resource type="Script" uid="uid://bbfyorl02mg2e" path="res://scripts/main.gd" id="1_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://bus5h20b6uhui" path="res://scenes/player.tscn" id="2_sugp2"]
 [ext_resource type="PackedScene" uid="uid://cdx7kghw88chw" path="res://scenes/enemy.tscn" id="3_sugp2"]
+[ext_resource type="Texture2D" uid="uid://c6xpebffhkkvp" path="res://sprites/background.png" id="4_jyhfs"]
 
 [sub_resource type="Curve2D" id="Curve2D_sugp2"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 77, 79, 0, 0, 0, 0, 397, 79, 0, 0, 0, 0, 396, 259, 0, 0, 0, 0, 76, 259, 0, 0, 0, 0, 77, 79, 0, 0, 0, 0, 77, 79, 0, 0, 0, 0, 77, 79)
+"points": PackedVector2Array(0, 0, 0, 0, 0.4705864, 0, 0, 0, 0, 0, 636.50775, 0, 0, 0, 0, 0, 636.50775, 360, 0, 0, 0, 0, 0.4705864, 360, 0, 0, 0, 0, 0.4705864, 0)
 }
-point_count = 7
+point_count = 5
 
 [node name="Main" type="Node2D" unique_id=1984651099]
 script = ExtResource("1_jyhfs")
 player_scene = ExtResource("2_sugp2")
 enemy_scene = ExtResource("3_sugp2")
 
-[node name="Background" type="ColorRect" parent="." unique_id=53272879]
-modulate = Color(0.39688927, 0.39688927, 0.39688924, 1)
-offset_left = -1000.0
-offset_top = -1000.0
-offset_right = 1000.0
-offset_bottom = 1000.0
-color = Color(0, 0, 0.32156864, 1)
+[node name="Background" type="Sprite2D" parent="." unique_id=495847255]
+texture_repeat = 2
+texture = ExtResource("4_jyhfs")
+region_enabled = true
+region_rect = Rect2(0, 0, 10000, 10000)
 
 [node name="Player" parent="." unique_id=1062722222 groups=["player"] instance=ExtResource("2_sugp2")]
 position = Vector2(237, 169)
@@ -35,7 +34,7 @@ scale = Vector2(1.0062305, 1)
 curve = SubResource("Curve2D_sugp2")
 
 [node name="SpawnLocation" type="PathFollow2D" parent="SpawnPath" unique_id=1979444003]
-position = Vector2(77, 79)
+position = Vector2(0.4705864, 0)
 
 [connection signal="tree_exited" from="Player" to="." method="_on_player_died"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
