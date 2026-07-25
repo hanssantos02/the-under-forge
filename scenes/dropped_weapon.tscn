@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dnpxf35nuyc7e"]
 
 [ext_resource type="Script" uid="uid://3d1qeru4qdk6" path="res://scripts/dropped_weapon.gd" id="1_qd357"]
+[ext_resource type="Texture2D" uid="uid://csgrwyf0bmyem" path="res://sprites/greatsword.png" id="2_q8xm2"]
 [ext_resource type="Texture2D" uid="uid://bis8auo2hkqwq" path="res://sprites/weapon.png" id="2_us8y3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6baej"]
@@ -20,6 +21,7 @@ fill_to = Vector2(1, 0.5)
 [node name="DroppedWeapon" type="Area2D" unique_id=1573558440 groups=["dropped_weapon"]]
 rotation = -0.7853982
 script = ExtResource("1_qd357")
+evolved_texture = ExtResource("2_q8xm2")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=819940746]
 modulate = Color(1.8247963, 1.8247963, 1.8247963, 1)

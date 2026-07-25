@@ -17,6 +17,7 @@ func equip_weapon(new_stats: WeaponStats) -> void:
 	weapon_pivot.stats = new_stats
 	weapon_pivot.show()
 	weapon_timer.start()
+	weapon_pivot.update_appearance()
 	has_weapon = true
 
 func _physics_process(_delta: float) -> void:

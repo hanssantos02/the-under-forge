@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bis8auo2hkqwq" path="res://sprites/weapon.png" id="5_qlg0r"]
 [ext_resource type="PackedScene" uid="uid://co5ocd4hvs1d4" path="res://scenes/projectile.tscn" id="5_tuyoq"]
 [ext_resource type="Resource" uid="uid://befod76iap02p" path="res://resources/base_weapon.tres" id="6_fjrip"]
+[ext_resource type="Texture2D" uid="uid://csgrwyf0bmyem" path="res://sprites/greatsword.png" id="9_jej6c"]
 [ext_resource type="PackedScene" uid="uid://cfvyubwjo2md2" path="res://scenes/movement_animator.tscn" id="10_y4r1p"]
 [ext_resource type="Texture2D" uid="uid://bi425yj7bist3" path="res://sprites/arrow.png" id="11_3v2ag"]
 [ext_resource type="Script" uid="uid://c8ukxxhmyegu" path="res://scripts/weapon_indicator.gd" id="12_jej6c"]
@@ -38,6 +39,7 @@ script = ExtResource("4_ur7pv")
 script = ExtResource("4_qlg0r")
 projectile_scene = ExtResource("5_tuyoq")
 stats = ExtResource("6_fjrip")
+evolved_texture = ExtResource("9_jej6c")
 
 [node name="WeaponSprite" type="Sprite2D" parent="WeaponPivot" unique_id=142814430]
 position = Vector2(15, 0)
