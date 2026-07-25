@@ -12,7 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://csgrwyf0bmyem" path="res://sprites/greatsword.png" id="9_jej6c"]
 [ext_resource type="PackedScene" uid="uid://cfvyubwjo2md2" path="res://scenes/movement_animator.tscn" id="10_y4r1p"]
 [ext_resource type="Texture2D" uid="uid://bi425yj7bist3" path="res://sprites/arrow.png" id="11_3v2ag"]
+[ext_resource type="AudioStream" uid="uid://d1rcsrlv2wy1k" path="res://music/shoot.wav" id="11_f1ej7"]
 [ext_resource type="Script" uid="uid://c8ukxxhmyegu" path="res://scripts/weapon_indicator.gd" id="12_jej6c"]
+[ext_resource type="AudioStream" uid="uid://y0t7d41ptuna" path="res://music/weapon_pickup.wav" id="15_oprun"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6baej"]
 size = Vector2(12, 8)
@@ -52,6 +54,11 @@ position = Vector2(7, 0)
 wait_time = 0.5
 autostart = true
 
+[node name="ShootSfx" type="AudioStreamPlayer2D" parent="WeaponPivot" unique_id=1393887445]
+rotation = -0.0017626648
+stream = ExtResource("11_f1ej7")
+bus = &"SFX"
+
 [node name="MovementAnimator" parent="." unique_id=853006593 node_paths=PackedStringArray("sprite", "character") instance=ExtResource("10_y4r1p")]
 sprite = NodePath("../Sprite2D")
 character = NodePath("..")
@@ -62,6 +69,10 @@ character = NodePath("..")
 texture = ExtResource("11_3v2ag")
 script = ExtResource("12_jej6c")
 camera_2d = NodePath("../../Camera2D")
+
+[node name="PickupSFX" type="AudioStreamPlayer" parent="." unique_id=93822516]
+stream = ExtResource("15_oprun")
+bus = &"SFX"
 
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="timeout" from="WeaponPivot/WeaponTimer" to="WeaponPivot" method="_on_timer_timeout"]

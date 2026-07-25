@@ -4,6 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://bus5h20b6uhui" path="res://scenes/player.tscn" id="2_sugp2"]
 [ext_resource type="PackedScene" uid="uid://cdx7kghw88chw" path="res://scenes/enemy.tscn" id="3_sugp2"]
 [ext_resource type="Texture2D" uid="uid://c6xpebffhkkvp" path="res://sprites/background.png" id="4_jyhfs"]
+[ext_resource type="AudioStream" uid="uid://dxqs2nbbmrw12" path="res://music/background_music.wav" id="5_tbgi4"]
+[ext_resource type="AudioStream" uid="uid://xumw6ivu0lca" path="res://music/player_died.wav" id="6_tefeu"]
 
 [sub_resource type="Curve2D" id="Curve2D_sugp2"]
 _data = {
@@ -43,6 +45,15 @@ position = Vector2(0.4705864, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1192073724]
 environment = SubResource("Environment_6baej")
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="." unique_id=1807367578]
+stream = ExtResource("5_tbgi4")
+autoplay = true
+bus = &"BGM"
+
+[node name="DeathSFX" type="AudioStreamPlayer" parent="." unique_id=2030935121]
+stream = ExtResource("6_tefeu")
+bus = &"SFX"
 
 [connection signal="tree_exited" from="Player" to="." method="_on_player_died"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

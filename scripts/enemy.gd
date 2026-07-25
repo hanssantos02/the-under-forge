@@ -3,6 +3,7 @@ extends CharacterBody2D
 @export var speed: float = 50.0
 @export var explosion_scene: PackedScene
 @onready var flash_rect: ColorRect = $Sprite2D/FlashRect
+@onready var hit_sfx: AudioStreamPlayer2D = $HitSFX
 var player
 var last_direction: Vector2 = Vector2.ZERO
 
@@ -21,6 +22,7 @@ func _on_damaged() -> void:
 	var tween = create_tween()
 	flash_rect.modulate.a = 1.0
 	tween.tween_property(flash_rect, "modulate:a", 0.0, 0.15)
+	hit_sfx.play()
 
 func _on_health_component_died() -> void:
 	var explosion = explosion_scene.instantiate()

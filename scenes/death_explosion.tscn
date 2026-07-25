@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://brye3pkbkraip"]
 
 [ext_resource type="Script" uid="uid://coha4rsdsewae" path="res://scripts/death_explosion.gd" id="1_1ltxp"]
+[ext_resource type="AudioStream" uid="uid://bn4pa6tsevx8u" path="res://music/enemy_death.wav" id="2_pq7px"]
 
 [node name="DeathExplosion" type="CPUParticles2D" unique_id=357969250]
 emitting = false
@@ -14,5 +15,10 @@ initial_velocity_max = 100.0
 scale_amount_max = 2.0
 color = Color(0.54509807, 0.60784316, 0.7058824, 1)
 script = ExtResource("1_1ltxp")
+
+[node name="DeathSFX" type="AudioStreamPlayer2D" parent="." unique_id=1595188037]
+stream = ExtResource("2_pq7px")
+autoplay = true
+bus = &"SFX"
 
 [connection signal="finished" from="." to="." method="_on_finished"]

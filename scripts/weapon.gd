@@ -7,6 +7,7 @@ extends Node2D
 @onready var weapon_timer: Timer = $WeaponTimer
 @onready var camera_2d: Camera2D = $"../Camera2D"
 @onready var weapon_sprite: Sprite2D = $WeaponSprite
+@onready var shoot_sfx: AudioStreamPlayer2D = $ShootSfx
 
 
 func _ready() -> void:
@@ -25,6 +26,7 @@ func _on_timer_timeout() -> void:
 	projectile.global_rotation = global_rotation
 	camera_2d.apply_shake(0.5)
 	get_tree().current_scene.add_child(projectile)
+	shoot_sfx.play()
 	
 func update_appearance() -> void:
 	if stats.damage >= 15.0:

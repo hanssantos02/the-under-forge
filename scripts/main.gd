@@ -4,11 +4,13 @@ extends Node2D
 @export var enemy_scene: PackedScene
 @onready var spawn_location: PathFollow2D = $SpawnPath/SpawnLocation
 @onready var spawn_timer: Timer = $SpawnTimer
+@onready var death_sfx: AudioStreamPlayer = $DeathSFX
 var is_respawning: bool = false
 
 func _on_player_died() -> void:
 	is_respawning = true
 	spawn_timer.stop()
+	death_sfx.play()
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if is_respawning and event.is_action_pressed("ui_accept"):

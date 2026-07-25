@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bi18c06iqljql" path="res://scenes/health_component.tscn" id="3_4ra3w"]
 [ext_resource type="PackedScene" uid="uid://c62w87grwbrgy" path="res://scenes/hitbox_component.tscn" id="4_5uy6h"]
 [ext_resource type="PackedScene" uid="uid://cfvyubwjo2md2" path="res://scenes/movement_animator.tscn" id="6_xwavj"]
+[ext_resource type="AudioStream" uid="uid://deqesj080j7au" path="res://music/enemy_hit.wav" id="7_nenq2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6baej"]
 size = Vector2(10, 8)
@@ -45,6 +46,10 @@ shape = SubResource("RectangleShape2D_uu65c")
 [node name="MovementAnimator" parent="." unique_id=853006593 node_paths=PackedStringArray("sprite", "character") instance=ExtResource("6_xwavj")]
 sprite = NodePath("../Sprite2D")
 character = NodePath("..")
+
+[node name="HitSFX" type="AudioStreamPlayer2D" parent="." unique_id=342261864]
+stream = ExtResource("7_nenq2")
+bus = &"SFX"
 
 [connection signal="damaged" from="HealthComponent" to="." method="_on_damaged"]
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]

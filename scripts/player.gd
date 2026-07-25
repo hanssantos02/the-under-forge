@@ -6,6 +6,7 @@ extends CharacterBody2D
 @onready var camera_2d: Camera2D = $Camera2D
 @export var has_weapon: bool = true
 @onready var weapon_timer: Timer = $WeaponPivot/WeaponTimer
+@onready var pickup_sfx: AudioStreamPlayer = $PickupSFX
 
 func _ready() -> void:
 	if not has_weapon:
@@ -19,6 +20,7 @@ func equip_weapon(new_stats: WeaponStats) -> void:
 	weapon_timer.start()
 	weapon_pivot.update_appearance()
 	has_weapon = true
+	pickup_sfx.play()
 
 func _physics_process(_delta: float) -> void:
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
