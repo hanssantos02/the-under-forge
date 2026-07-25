@@ -4,14 +4,18 @@ extends CharacterBody2D
 @export var explosion_scene: PackedScene
 @onready var flash_rect: ColorRect = $Sprite2D/FlashRect
 var player
+var last_direction: Vector2 = Vector2.ZERO
 
 func _physics_process(_delta: float) -> void:
 	if not is_instance_valid(player):
 		player = get_tree().get_first_node_in_group("player")
+		if player == null:
+			velocity = last_direction * speed
 	else:
 		var direction = global_position.direction_to(player.global_position)
+		last_direction = direction
 		velocity = direction * speed
-		move_and_slide()
+	move_and_slide()
 		
 func _on_damaged() -> void:
 	var tween = create_tween()
