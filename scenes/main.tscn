@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bus5h20b6uhui" path="res://scenes/player.tscn" id="2_sugp2"]
 [ext_resource type="PackedScene" uid="uid://cdx7kghw88chw" path="res://scenes/enemy.tscn" id="3_sugp2"]
 [ext_resource type="Texture2D" uid="uid://c6xpebffhkkvp" path="res://sprites/background.png" id="4_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://dtsimitwtk5ya" path="res://scenes/swarmer_enemy.tscn" id="4_o6xl0"]
 [ext_resource type="AudioStream" uid="uid://dxqs2nbbmrw12" path="res://music/background_music.wav" id="5_tbgi4"]
 [ext_resource type="AudioStream" uid="uid://xumw6ivu0lca" path="res://music/player_died.wav" id="6_tefeu"]
 
@@ -21,6 +22,7 @@ glow_enabled = true
 script = ExtResource("1_jyhfs")
 player_scene = ExtResource("2_sugp2")
 enemy_scene = ExtResource("3_sugp2")
+swarmer_scene = ExtResource("4_o6xl0")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=495847255]
 texture_repeat = 2

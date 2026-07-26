@@ -2,12 +2,14 @@ extends Node2D
 
 @export var player_scene: PackedScene
 @export var enemy_scene: PackedScene
+@export var swarmer_scene: PackedScene
 @onready var spawn_location: PathFollow2D = $SpawnPath/SpawnLocation
 @onready var spawn_timer: Timer = $SpawnTimer
 @onready var death_sfx: AudioStreamPlayer = $DeathSFX
 @onready var difficulty_timer: Timer = $DifficultyTimer
 var is_respawning: bool = false
 var minimum_spawn_time: float = 0.3
+var difficulty_level: int = 1
 
 func _on_player_died() -> void:
 	is_respawning = true
@@ -21,6 +23,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		spawn_timer.start()
 		spawn_timer.wait_time = 2.0
 		difficulty_timer.start()
+		difficulty_level = 1
 		var player = player_scene.instantiate()
 		player.global_position = Vector2.ZERO
 		player.has_weapon = false
@@ -34,7 +37,12 @@ func _on_spawn_timer_timeout() -> void:
 		$SpawnPath.global_position = player.global_position
 	var spawn = randf_range(0.0, 1.0)
 	spawn_location.progress_ratio = spawn
-	var new_enemy = enemy_scene.instantiate()
+	var enemy_to_spawn = enemy_scene
+	if difficulty_level >= 3:
+		var enemy_rate = randf()
+		if enemy_rate <= 0.3:
+			enemy_to_spawn = swarmer_scene
+	var new_enemy = enemy_to_spawn.instantiate()
 	new_enemy.global_position = spawn_location.global_position
 	get_tree().current_scene.add_child(new_enemy)
 	new_enemy.add_to_group("enemy")
@@ -42,3 +50,4 @@ func _on_spawn_timer_timeout() -> void:
 
 func _on_difficulty_timer_timeout() -> void:
 	spawn_timer.wait_time = maxf(minimum_spawn_time, spawn_timer.wait_time - 0.1)
+	difficulty_level += 1

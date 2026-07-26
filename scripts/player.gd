@@ -88,3 +88,7 @@ func level_up() -> void:
 	exp_to_next_level *= 1.5
 	get_tree().paused = true
 	upgrade_menu.show()
+
+func _on_magnet_area_area_entered(area: Area2D) -> void:
+	if area.has_method("fly_towards"):
+		area.fly_towards(self)
