@@ -15,6 +15,7 @@ extends CharacterBody2D
 var is_dashing: bool = false
 var can_dash: bool = true
 var dash_direction: Vector2 = Vector2.ZERO
+var experience: int = 0
 
 func _ready() -> void:
 	if not has_weapon:
@@ -66,3 +67,8 @@ func _on_dash_duration_timer_timeout() -> void:
 
 func _on_dash_cooldown_timer_timeout() -> void:
 	can_dash = true
+	
+
+func gain_xp(amount: int) -> void:
+	experience += amount
+	print(experience)

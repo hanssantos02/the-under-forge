@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @export var speed: float = 50.0
 @export var explosion_scene: PackedScene
+@export var xp_gem_scene: PackedScene
 @onready var flash_rect: ColorRect = $Sprite2D/FlashRect
 @onready var hit_sfx: AudioStreamPlayer2D = $HitSFX
 var player
@@ -28,4 +29,7 @@ func _on_health_component_died() -> void:
 	var explosion = explosion_scene.instantiate()
 	explosion.global_position = global_position
 	get_tree().current_scene.add_child(explosion)
+	var xp_gem = xp_gem_scene.instantiate()
+	xp_gem.global_position = global_position
+	get_tree().current_scene.add_child(xp_gem)
 	queue_free()

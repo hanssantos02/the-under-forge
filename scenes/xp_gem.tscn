@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://7o4gj8js15f0"]
+
+[ext_resource type="Script" uid="uid://s2l3vsf4j388" path="res://scripts/xp_gem.gd" id="1_srbn3"]
+[ext_resource type="Texture2D" uid="uid://d2y48b8ftito" path="res://sprites/XPGem.png" id="2_x7fs0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_he4yp"]
+radius = 4.0
+
+[node name="XPGem" type="Area2D" unique_id=1441929608]
+scale = Vector2(0.8, 0.8)
+collision_layer = 8
+script = ExtResource("1_srbn3")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=790787791]
+texture = ExtResource("2_x7fs0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=526840080]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_he4yp")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
