@@ -33,6 +33,7 @@ region_rect = Rect2(0, 0, 10000, 10000)
 position = Vector2(237, 169)
 
 [node name="SpawnTimer" type="Timer" parent="." unique_id=1967817791]
+wait_time = 2.0
 autostart = true
 
 [node name="SpawnPath" type="Path2D" parent="." unique_id=1723963146]
@@ -47,6 +48,7 @@ position = Vector2(0.4705864, 0)
 environment = SubResource("Environment_6baej")
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="." unique_id=1807367578]
+process_mode = 3
 stream = ExtResource("5_tbgi4")
 autoplay = true
 bus = &"BGM"

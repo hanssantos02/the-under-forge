@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://c8ukxxhmyegu" path="res://scripts/weapon_indicator.gd" id="12_jej6c"]
 [ext_resource type="AudioStream" uid="uid://y0t7d41ptuna" path="res://music/weapon_pickup.wav" id="15_oprun"]
 [ext_resource type="AudioStream" uid="uid://by5ujsk3pmmoq" path="res://music/dash.wav" id="16_a8ls1"]
+[ext_resource type="PackedScene" uid="uid://t187vwt48srk" path="res://scenes/upgrade_menu.tscn" id="17_qfm1y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6baej"]
 size = Vector2(12, 8)
@@ -85,6 +86,10 @@ one_shot = true
 [node name="DashSFX" type="AudioStreamPlayer" parent="." unique_id=1187050987]
 stream = ExtResource("16_a8ls1")
 bus = &"SFX"
+
+[node name="UpgradeMenu" parent="." unique_id=1246175099 node_paths=PackedStringArray("player") instance=ExtResource("17_qfm1y")]
+visible = false
+player = NodePath("..")
 
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="timeout" from="WeaponPivot/WeaponTimer" to="WeaponPivot" method="_on_timer_timeout"]

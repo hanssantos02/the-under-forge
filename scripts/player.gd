@@ -12,10 +12,13 @@ extends CharacterBody2D
 @onready var dash_cooldown_timer: Timer = $DashCooldownTimer
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var dash_sfx: AudioStreamPlayer = $DashSFX
+@onready var upgrade_menu: CanvasLayer = $UpgradeMenu
 var is_dashing: bool = false
 var can_dash: bool = true
 var dash_direction: Vector2 = Vector2.ZERO
 var experience: int = 0
+var level: int = 1
+var exp_to_next_level: int = 5
 
 func _ready() -> void:
 	if not has_weapon:
@@ -71,4 +74,14 @@ func _on_dash_cooldown_timer_timeout() -> void:
 
 func gain_xp(amount: int) -> void:
 	experience += amount
-	print(experience)
+	if experience >= exp_to_next_level:
+		level_up()
+		
+func level_up() -> void:
+	if health_component.current_health <= 0:
+		return
+	experience -= exp_to_next_level
+	level += 1
+	exp_to_next_level *= 1.5
+	get_tree().paused = true
+	upgrade_menu.show()
