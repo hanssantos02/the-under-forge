@@ -3,6 +3,7 @@ extends Node2D
 @export var player_scene: PackedScene
 @export var enemy_scene: PackedScene
 @export var swarmer_scene: PackedScene
+@export var brute_scene: PackedScene
 @onready var spawn_location: PathFollow2D = $SpawnPath/SpawnLocation
 @onready var spawn_timer: Timer = $SpawnTimer
 @onready var death_sfx: AudioStreamPlayer = $DeathSFX
@@ -23,7 +24,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		spawn_timer.start()
 		spawn_timer.wait_time = 2.0
 		difficulty_timer.start()
-		difficulty_level = 1
 		var player = player_scene.instantiate()
 		player.global_position = Vector2.ZERO
 		player.has_weapon = false
@@ -38,7 +38,13 @@ func _on_spawn_timer_timeout() -> void:
 	var spawn = randf_range(0.0, 1.0)
 	spawn_location.progress_ratio = spawn
 	var enemy_to_spawn = enemy_scene
-	if difficulty_level >= 3:
+	if difficulty_level >= 5:
+		var enemy_rate = randf()
+		if enemy_rate <= 0.15:
+			enemy_to_spawn = brute_scene
+		elif enemy_rate <= 0.45:
+			enemy_to_spawn = swarmer_scene
+	elif difficulty_level >= 3:
 		var enemy_rate = randf()
 		if enemy_rate <= 0.3:
 			enemy_to_spawn = swarmer_scene

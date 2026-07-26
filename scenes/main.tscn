@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c6xpebffhkkvp" path="res://sprites/background.png" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://dtsimitwtk5ya" path="res://scenes/swarmer_enemy.tscn" id="4_o6xl0"]
 [ext_resource type="AudioStream" uid="uid://dxqs2nbbmrw12" path="res://music/background_music.wav" id="5_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://c58oe41xbr7l6" path="res://scenes/brute_enemy.tscn" id="5_tipki"]
 [ext_resource type="AudioStream" uid="uid://xumw6ivu0lca" path="res://music/player_died.wav" id="6_tefeu"]
 
 [sub_resource type="Curve2D" id="Curve2D_sugp2"]
@@ -23,6 +24,7 @@ script = ExtResource("1_jyhfs")
 player_scene = ExtResource("2_sugp2")
 enemy_scene = ExtResource("3_sugp2")
 swarmer_scene = ExtResource("4_o6xl0")
+brute_scene = ExtResource("5_tipki")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=495847255]
 texture_repeat = 2

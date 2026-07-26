@@ -3,28 +3,29 @@
 [ext_resource type="Script" uid="uid://mh1d3fhpfdbb" path="res://scripts/enemy.gd" id="1_x5bun"]
 [ext_resource type="PackedScene" uid="uid://brye3pkbkraip" path="res://scenes/death_explosion.tscn" id="2_2f2qb"]
 [ext_resource type="PackedScene" uid="uid://7o4gj8js15f0" path="res://scenes/xp_gem.tscn" id="3_5srpn"]
-[ext_resource type="Texture2D" uid="uid://g1drn400gekt" path="res://sprites/enemy.png" id="4_mx63e"]
+[ext_resource type="Texture2D" uid="uid://cqtepapdbvf1a" path="res://sprites/Brute.png" id="4_x5bun"]
 [ext_resource type="PackedScene" uid="uid://bi18c06iqljql" path="res://scenes/health_component.tscn" id="5_l8egu"]
 [ext_resource type="PackedScene" uid="uid://c62w87grwbrgy" path="res://scenes/hitbox_component.tscn" id="6_ofu43"]
 [ext_resource type="PackedScene" uid="uid://cfvyubwjo2md2" path="res://scenes/movement_animator.tscn" id="7_phmtf"]
 [ext_resource type="AudioStream" uid="uid://deqesj080j7au" path="res://music/enemy_hit.wav" id="8_03aoj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6baej"]
-size = Vector2(10, 8)
+size = Vector2(15, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uu65c"]
-size = Vector2(12, 10)
+size = Vector2(17, 16)
 
 [node name="BruteEnemy" type="CharacterBody2D" unique_id=106604056]
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_x5bun")
+speed = 30.0
 explosion_scene = ExtResource("2_2f2qb")
 xp_gem_scene = ExtResource("3_5srpn")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=941818271]
 clip_children = 2
-texture = ExtResource("4_mx63e")
+texture = ExtResource("4_x5bun")
 
 [node name="FlashRect" type="ColorRect" parent="Sprite2D" unique_id=176016089]
 modulate = Color(1, 1, 1, 0)
@@ -34,16 +35,17 @@ offset_right = 8.0
 offset_bottom = 8.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=390280680]
-position = Vector2(0, -3)
+position = Vector2(-0.5, -1)
 shape = SubResource("RectangleShape2D_6baej")
 
 [node name="HealthComponent" parent="." unique_id=1323311277 instance=ExtResource("5_l8egu")]
+max_health = 60.0
 
 [node name="HitboxComponent" parent="." unique_id=567847275 instance=ExtResource("6_ofu43")]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=1861527045]
-position = Vector2(0, -3)
+position = Vector2(-0.5, -1)
 shape = SubResource("RectangleShape2D_uu65c")
 
 [node name="MovementAnimator" parent="." unique_id=853006593 node_paths=PackedStringArray("sprite", "character") instance=ExtResource("7_phmtf")]
