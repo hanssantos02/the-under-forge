@@ -9,7 +9,7 @@
 
 [sub_resource type="Curve2D" id="Curve2D_sugp2"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0.4705864, 0, 0, 0, 0, 0, 636.50775, 0, 0, 0, 0, 0, 636.50775, 360, 0, 0, 0, 0, 0.4705864, 360, 0, 0, 0, 0, 0.4705864, 0)
+"points": PackedVector2Array(0, 0, 0, 0, -239.03717, -100, 0, 0, 0, 0, 644.45825, -100, 0, 0, 0, 0, 645.452, 367, 0, 0, 0, 0, -241.02478, 369, 0, 0, 0, 0, -240.03098, -98)
 }
 point_count = 5
 
@@ -36,13 +36,17 @@ position = Vector2(237, 169)
 wait_time = 2.0
 autostart = true
 
+[node name="DifficultyTimer" type="Timer" parent="." unique_id=1607902013]
+wait_time = 10.0
+autostart = true
+
 [node name="SpawnPath" type="Path2D" parent="." unique_id=1723963146]
 position = Vector2(-0.47351837, 0)
 scale = Vector2(1.0062305, 1)
 curve = SubResource("Curve2D_sugp2")
 
 [node name="SpawnLocation" type="PathFollow2D" parent="SpawnPath" unique_id=1979444003]
-position = Vector2(0.4705864, 0)
+position = Vector2(-239.03717, -100)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1192073724]
 environment = SubResource("Environment_6baej")
@@ -59,3 +63,4 @@ bus = &"SFX"
 
 [connection signal="tree_exited" from="Player" to="." method="_on_player_died"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="DifficultyTimer" to="." method="_on_difficulty_timer_timeout"]

@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://c8ukxxhmyegu" path="res://scripts/weapon_indicator.gd" id="12_jej6c"]
 [ext_resource type="AudioStream" uid="uid://y0t7d41ptuna" path="res://music/weapon_pickup.wav" id="15_oprun"]
 [ext_resource type="AudioStream" uid="uid://by5ujsk3pmmoq" path="res://music/dash.wav" id="16_a8ls1"]
+[ext_resource type="AudioStream" uid="uid://d125f2wwmqkbf" path="res://music/pickup_gem.wav" id="17_fulsm"]
 [ext_resource type="PackedScene" uid="uid://t187vwt48srk" path="res://scenes/upgrade_menu.tscn" id="17_qfm1y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6baej"]
@@ -59,6 +60,7 @@ autostart = true
 [node name="ShootSfx" type="AudioStreamPlayer2D" parent="WeaponPivot" unique_id=1393887445]
 rotation = -0.0017626648
 stream = ExtResource("11_f1ej7")
+volume_db = -7.0
 bus = &"SFX"
 
 [node name="MovementAnimator" parent="." unique_id=853006593 node_paths=PackedStringArray("sprite", "character") instance=ExtResource("10_y4r1p")]
@@ -72,10 +74,6 @@ texture = ExtResource("11_3v2ag")
 script = ExtResource("12_jej6c")
 camera_2d = NodePath("../../Camera2D")
 
-[node name="PickupSFX" type="AudioStreamPlayer" parent="." unique_id=93822516]
-stream = ExtResource("15_oprun")
-bus = &"SFX"
-
 [node name="DashDurationTimer" type="Timer" parent="." unique_id=49337859]
 wait_time = 0.2
 one_shot = true
@@ -85,6 +83,15 @@ one_shot = true
 
 [node name="DashSFX" type="AudioStreamPlayer" parent="." unique_id=1187050987]
 stream = ExtResource("16_a8ls1")
+bus = &"SFX"
+
+[node name="PickupSFX" type="AudioStreamPlayer" parent="." unique_id=93822516]
+stream = ExtResource("15_oprun")
+bus = &"SFX"
+
+[node name="GemSFX" type="AudioStreamPlayer" parent="." unique_id=711773973]
+process_mode = 3
+stream = ExtResource("17_fulsm")
 bus = &"SFX"
 
 [node name="UpgradeMenu" parent="." unique_id=1246175099 node_paths=PackedStringArray("player") instance=ExtResource("17_qfm1y")]

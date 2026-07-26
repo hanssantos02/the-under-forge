@@ -10,7 +10,7 @@ func _on_upgrade_1_pressed() -> void:
 
 
 func _on_upgrade_2_pressed() -> void:
-	player.weapon_pivot.stats.fire_rate = maxf(0.0, player.weapon_pivot.stats.fire_rate - 0.2)
+	player.weapon_pivot.stats.fire_rate = maxf(0.2, player.weapon_pivot.stats.fire_rate - 0.2)
 	player.weapon_timer.wait_time = player.weapon_pivot.stats.fire_rate
 	get_tree().paused = false
 	hide()

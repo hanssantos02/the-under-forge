@@ -13,6 +13,8 @@ extends CharacterBody2D
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var dash_sfx: AudioStreamPlayer = $DashSFX
 @onready var upgrade_menu: CanvasLayer = $UpgradeMenu
+@onready var gem_sfx: AudioStreamPlayer = $GemSFX
+
 var is_dashing: bool = false
 var can_dash: bool = true
 var dash_direction: Vector2 = Vector2.ZERO
@@ -74,6 +76,7 @@ func _on_dash_cooldown_timer_timeout() -> void:
 
 func gain_xp(amount: int) -> void:
 	experience += amount
+	gem_sfx.play()
 	if experience >= exp_to_next_level:
 		level_up()
 		
