@@ -16,6 +16,7 @@ size = Vector2(12, 10)
 
 [node name="Enemy" type="CharacterBody2D" unique_id=106604056]
 collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_md0e3")
 explosion_scene = ExtResource("2_c4w8v")
 

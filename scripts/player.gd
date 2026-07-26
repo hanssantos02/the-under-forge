@@ -2,11 +2,19 @@ extends CharacterBody2D
 
 @export var speed: float = 100.0
 @export var dropped_weapon_scene: PackedScene
+@export var has_weapon: bool = true
+@export var dash_speed: float = 400.0
 @onready var weapon_pivot: Node2D = $WeaponPivot
 @onready var camera_2d: Camera2D = $Camera2D
-@export var has_weapon: bool = true
 @onready var weapon_timer: Timer = $WeaponPivot/WeaponTimer
 @onready var pickup_sfx: AudioStreamPlayer = $PickupSFX
+@onready var dash_duration_timer: Timer = $DashDurationTimer
+@onready var dash_cooldown_timer: Timer = $DashCooldownTimer
+@onready var health_component: HealthComponent = $HealthComponent
+@onready var dash_sfx: AudioStreamPlayer = $DashSFX
+var is_dashing: bool = false
+var can_dash: bool = true
+var dash_direction: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	if not has_weapon:
@@ -24,7 +32,20 @@ func equip_weapon(new_stats: WeaponStats) -> void:
 
 func _physics_process(_delta: float) -> void:
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	velocity = direction * speed
+	if Input.is_action_just_pressed("dash") and can_dash and direction != Vector2.ZERO:
+		is_dashing = true
+		can_dash = false
+		dash_direction = direction
+		dash_duration_timer.start()
+		dash_cooldown_timer.start()
+		health_component.is_invincible = true
+		set_collision_mask_value(2, false)
+		set_collision_layer_value(1, false)
+		dash_sfx.play()
+	if is_dashing:
+		velocity = dash_direction * dash_speed
+	else:
+		velocity = direction * speed
 	move_and_slide()
 
 func _on_health_component_died() -> void:
@@ -36,3 +57,12 @@ func _on_health_component_died() -> void:
 		camera_2d.reparent(weapon)
 	queue_free()
 	
+func _on_dash_duration_timer_timeout() -> void:
+	is_dashing = false
+	health_component.is_invincible = false
+	set_collision_mask_value(2, true)
+	set_collision_layer_value(1, true)
+
+
+func _on_dash_cooldown_timer_timeout() -> void:
+	can_dash = true

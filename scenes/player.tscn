@@ -15,12 +15,13 @@
 [ext_resource type="AudioStream" uid="uid://d1rcsrlv2wy1k" path="res://music/shoot.wav" id="11_f1ej7"]
 [ext_resource type="Script" uid="uid://c8ukxxhmyegu" path="res://scripts/weapon_indicator.gd" id="12_jej6c"]
 [ext_resource type="AudioStream" uid="uid://y0t7d41ptuna" path="res://music/weapon_pickup.wav" id="15_oprun"]
+[ext_resource type="AudioStream" uid="uid://by5ujsk3pmmoq" path="res://music/dash.wav" id="16_a8ls1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6baej"]
 size = Vector2(12, 8)
 
 [node name="Player" type="CharacterBody2D" unique_id=1062722222]
-collision_mask = 2
+collision_mask = 6
 script = ExtResource("1_g2els")
 dropped_weapon_scene = ExtResource("2_smehm")
 
@@ -74,5 +75,18 @@ camera_2d = NodePath("../../Camera2D")
 stream = ExtResource("15_oprun")
 bus = &"SFX"
 
+[node name="DashDurationTimer" type="Timer" parent="." unique_id=49337859]
+wait_time = 0.2
+one_shot = true
+
+[node name="DashCooldownTimer" type="Timer" parent="." unique_id=1953111650]
+one_shot = true
+
+[node name="DashSFX" type="AudioStreamPlayer" parent="." unique_id=1187050987]
+stream = ExtResource("16_a8ls1")
+bus = &"SFX"
+
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="timeout" from="WeaponPivot/WeaponTimer" to="WeaponPivot" method="_on_timer_timeout"]
+[connection signal="timeout" from="DashDurationTimer" to="." method="_on_dash_duration_timer_timeout"]
+[connection signal="timeout" from="DashCooldownTimer" to="." method="_on_dash_cooldown_timer_timeout"]
