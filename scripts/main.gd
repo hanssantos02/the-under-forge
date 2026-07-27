@@ -23,7 +23,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if is_respawning and event.is_action_pressed("ui_accept") and not is_game_over:
 		is_respawning = false
 		spawn_timer.start()
-		spawn_timer.wait_time = 2.0
+		spawn_timer.wait_time = minf(2.0, spawn_timer.wait_time + 0.3)
 		difficulty_timer.start()
 		var player = player_scene.instantiate()
 		player.global_position = Vector2.ZERO

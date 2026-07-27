@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d1rfe3wtmkopj" path="res://scripts/upgrade_menu.gd" id="1_e3qxy"]
 [ext_resource type="Theme" uid="uid://dtybehsd5t4v1" path="res://resources/main_theme.tres" id="2_ksfom"]
+[ext_resource type="Script" uid="uid://c2jj44f53job8" path="res://scripts/juicy_button.gd" id="3_0e30j"]
 
 [node name="UpgradeMenu" type="CanvasLayer" unique_id=1246175099]
 process_mode = 3
@@ -14,6 +15,33 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.43529412)
+
+[node name="LegacyLabel" type="Label" parent="ColorRect" unique_id=131934619]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -74.5
+offset_right = 74.5
+offset_bottom = 23.0
+grow_horizontal = 2
+theme = ExtResource("2_ksfom")
+theme_override_font_sizes/font_size = 50
+text = "Choose your legacy"
+
+[node name="DescriptionLabel" type="Label" parent="ColorRect" unique_id=1633164287]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=962305419]
 anchors_preset = 8
@@ -33,16 +61,19 @@ theme = ExtResource("2_ksfom")
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Damage"
+script = ExtResource("3_0e30j")
 
 [node name="Upgrade2" type="Button" parent="HBoxContainer" unique_id=1164434640]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Fire Rate"
+script = ExtResource("3_0e30j")
 
 [node name="Upgrade3" type="Button" parent="HBoxContainer" unique_id=1605274878]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Agility"
+script = ExtResource("3_0e30j")
 
 [connection signal="pressed" from="HBoxContainer/Upgrade1" to="." method="_on_upgrade_1_pressed"]
 [connection signal="pressed" from="HBoxContainer/Upgrade2" to="." method="_on_upgrade_2_pressed"]
