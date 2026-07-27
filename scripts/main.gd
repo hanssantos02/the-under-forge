@@ -11,6 +11,7 @@ extends Node2D
 var is_respawning: bool = false
 var minimum_spawn_time: float = 0.3
 var difficulty_level: int = 1
+var is_game_over: bool = false
 
 func _on_player_died() -> void:
 	is_respawning = true
@@ -19,7 +20,7 @@ func _on_player_died() -> void:
 	death_sfx.play()
 	
 func _unhandled_input(event: InputEvent) -> void:
-	if is_respawning and event.is_action_pressed("ui_accept"):
+	if is_respawning and event.is_action_pressed("ui_accept") and not is_game_over:
 		is_respawning = false
 		spawn_timer.start()
 		spawn_timer.wait_time = 2.0
@@ -30,6 +31,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_tree().current_scene.add_child(player)
 		player.add_to_group("player")
 		player.tree_exited.connect(_on_player_died)
+		player.lineage_broken.connect(_on_lineage_broken)
 
 func _on_spawn_timer_timeout() -> void:
 	var player = get_tree().get_first_node_in_group("player")
@@ -57,3 +59,7 @@ func _on_spawn_timer_timeout() -> void:
 func _on_difficulty_timer_timeout() -> void:
 	spawn_timer.wait_time = maxf(minimum_spawn_time, spawn_timer.wait_time - 0.1)
 	difficulty_level += 1
+	
+func _on_lineage_broken() -> void:
+	is_game_over = true
+	print("GAME OVER!")

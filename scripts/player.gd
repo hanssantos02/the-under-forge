@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal lineage_broken
+
 @export var speed: float = 100.0
 @export var dropped_weapon_scene: PackedScene
 @export var has_weapon: bool = true
@@ -61,6 +63,9 @@ func _on_health_component_died() -> void:
 		weapon.global_position = global_position
 		get_tree().current_scene.add_child(weapon)
 		camera_2d.reparent(weapon)
+	else:
+		camera_2d.reparent(get_tree().current_scene)
+		lineage_broken.emit()
 	queue_free()
 	
 func _on_dash_duration_timer_timeout() -> void:
