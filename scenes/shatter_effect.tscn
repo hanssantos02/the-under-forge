@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://dbbiiku17y1xk"]
+
+[ext_resource type="Script" uid="uid://b8xvsi71afhuu" path="res://scripts/shatter_effect.gd" id="1_i3twh"]
+
+[sub_resource type="Gradient" id="Gradient_i3twh"]
+colors = PackedColorArray(0.9019608, 0.1254902, 0.1254902, 1, 0.9019608, 0.1254902, 0.1254902, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_i3twh"]
+gradient = SubResource("Gradient_i3twh")
+
+[sub_resource type="Curve" id="Curve_nhxe5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_1ytia"]
+curve = SubResource("Curve_nhxe5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sc3yg"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 100.0
+initial_velocity_max = 150.0
+gravity = Vector3(0, 0, 0)
+damping_min = 200.00002
+damping_max = 200.00002
+scale_curve = SubResource("CurveTexture_1ytia")
+color = Color(0.9019608, 0.1254902, 0.1254902, 1)
+color_ramp = SubResource("GradientTexture1D_i3twh")
+
+[node name="ShatterEffect" type="GPUParticles2D" unique_id=1773462750]
+emitting = false
+amount = 30
+lifetime = 0.8
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_sc3yg")
+script = ExtResource("1_i3twh")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

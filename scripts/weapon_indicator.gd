@@ -2,7 +2,7 @@ extends Sprite2D
 
 @export var camera_2d: Camera2D
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var weapon = get_tree().get_first_node_in_group("dropped_weapon")
 	if weapon == null:
 		hide()

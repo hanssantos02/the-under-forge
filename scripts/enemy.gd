@@ -28,8 +28,8 @@ func _on_damaged() -> void:
 func _on_health_component_died() -> void:
 	var explosion = explosion_scene.instantiate()
 	explosion.global_position = global_position
-	get_tree().current_scene.add_child(explosion)
+	get_tree().current_scene.call_deferred("add_child",explosion)
 	var xp_gem = xp_gem_scene.instantiate()
 	xp_gem.global_position = global_position
-	get_tree().current_scene.add_child(xp_gem)
+	get_tree().current_scene.call_deferred("add_child",xp_gem)
 	queue_free()

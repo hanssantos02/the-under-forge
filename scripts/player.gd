@@ -4,6 +4,8 @@ signal lineage_broken
 
 @export var speed: float = 100.0
 @export var dropped_weapon_scene: PackedScene
+@export var sacrifice_scene: PackedScene
+@export var shatter_scene: PackedScene
 @export var has_weapon: bool = true
 @export var dash_speed: float = 400.0
 @onready var weapon_pivot: Node2D = $WeaponPivot
@@ -20,9 +22,9 @@ signal lineage_broken
 var is_dashing: bool = false
 var can_dash: bool = true
 var dash_direction: Vector2 = Vector2.ZERO
-var experience: int = 0
+var experience: float = 0.0
 var level: int = 1
-var exp_to_next_level: int = 5
+var exp_to_next_level: float = 5.0
 
 func _ready() -> void:
 	if not has_weapon:
@@ -61,10 +63,17 @@ func _on_health_component_died() -> void:
 		var weapon = dropped_weapon_scene.instantiate()
 		weapon.stats = weapon_pivot.stats
 		weapon.global_position = global_position
-		get_tree().current_scene.add_child(weapon)
-		camera_2d.reparent(weapon)
+		get_tree().current_scene.call_deferred("add_child", weapon)
+		camera_2d.call_deferred("reparent",weapon)
+		var sacrifice = sacrifice_scene.instantiate()
+		sacrifice.global_position = global_position
+		get_tree().current_scene.call_deferred("add_child",sacrifice)
 	else:
+		var shatter = shatter_scene.instantiate()
+		shatter.global_position = global_position
+		get_tree().current_scene.call_deferred("add_child",shatter)
 		camera_2d.reparent(get_tree().current_scene)
+		camera_2d.make_current()
 		lineage_broken.emit()
 	queue_free()
 	
