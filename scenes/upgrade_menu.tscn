@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://t187vwt48srk"]
 
 [ext_resource type="Script" uid="uid://d1rfe3wtmkopj" path="res://scripts/upgrade_menu.gd" id="1_e3qxy"]
+[ext_resource type="Theme" uid="uid://dtybehsd5t4v1" path="res://resources/main_theme.tres" id="2_ksfom"]
 
 [node name="UpgradeMenu" type="CanvasLayer" unique_id=1246175099]
 process_mode = 3
@@ -20,23 +21,27 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -106.5
-offset_top = -20.0
-offset_right = 106.5
-offset_bottom = 20.0
+offset_left = -67.5
+offset_top = -8.0
+offset_right = 67.5
+offset_bottom = 23.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_ksfom")
 
 [node name="Upgrade1" type="Button" parent="HBoxContainer" unique_id=1209189345]
 layout_mode = 2
+size_flags_horizontal = 4
 text = "Damage"
 
 [node name="Upgrade2" type="Button" parent="HBoxContainer" unique_id=1164434640]
 layout_mode = 2
+size_flags_horizontal = 4
 text = "Fire Rate"
 
 [node name="Upgrade3" type="Button" parent="HBoxContainer" unique_id=1605274878]
 layout_mode = 2
+size_flags_horizontal = 4
 text = "Agility"
 
 [connection signal="pressed" from="HBoxContainer/Upgrade1" to="." method="_on_upgrade_1_pressed"]

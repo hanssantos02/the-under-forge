@@ -1,0 +1,35 @@
+[gd_resource type="Theme" format=3 uid="uid://dtybehsd5t4v1"]
+
+[ext_resource type="FontFile" uid="uid://bj5lvxqu7xacd" path="res://fonts/Kenney Pixel.ttf" id="1_ols5k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ols5k"]
+bg_color = Color(0, 0.13631886, 0.7409784, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.032472856, 0.25611252, 0.9385297, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2nojw"]
+bg_color = Color(0, 0, 0.54509807, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0.16131335, 0.839865, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_biaja"]
+bg_color = Color(0, 0.16078432, 0.8392157, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0.54509807, 1)
+
+[resource]
+default_font = ExtResource("1_ols5k")
+default_font_size = 24
+Button/styles/hover = SubResource("StyleBoxFlat_ols5k")
+Button/styles/normal = SubResource("StyleBoxFlat_2nojw")
+Button/styles/pressed = SubResource("StyleBoxFlat_biaja")

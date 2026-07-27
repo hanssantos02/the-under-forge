@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="The Under-Forge"
-run/main_scene="uid://b1536t62x2o2k"
+run/main_scene="uid://bya584erkjs0k"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+TransitionScreen="*uid://dqn1wum5luysu"
 
 [display]
 
