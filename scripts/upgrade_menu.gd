@@ -15,21 +15,58 @@ var current_choices: Array = []
 
 
 func _on_upgrade_1_pressed() -> void:
-	player.weapon_pivot.stats.damage += 5.0
-	player.weapon_pivot.update_appearance()
+	var upgrade_id = current_choices[0]["id"]
+	
+	match upgrade_id:
+		"proj_speed":
+			player.weapon_pivot.stats.projectile_speed += 50.0
+		"damage":
+			player.weapon_pivot.stats.damage += 5.0
+		"fire_rate":
+			player.weapon_pivot.stats.fire_rate = maxf(0.2, player.weapon_pivot.stats.fire_rate - 0.2)
+			player.weapon_timer.wait_time = player.weapon_pivot.stats.fire_rate
+		"player_speed":
+			player.speed += 20.0
+		"player_dash_speed":
+			player.dash_speed += 30.0
 	get_tree().paused = false
 	hide()
 
-
 func _on_upgrade_2_pressed() -> void:
-	player.weapon_pivot.stats.fire_rate = maxf(0.2, player.weapon_pivot.stats.fire_rate - 0.2)
-	player.weapon_timer.wait_time = player.weapon_pivot.stats.fire_rate
+	var upgrade_id = current_choices[1]["id"]
+	
+	match upgrade_id:
+		"proj_speed":
+			player.weapon_pivot.stats.projectile_speed += 50.0
+		"damage":
+			player.weapon_pivot.stats.damage += 5.0
+		"fire_rate":
+			player.weapon_pivot.stats.fire_rate = maxf(0.2, player.weapon_pivot.stats.fire_rate - 0.2)
+			player.weapon_timer.wait_time = player.weapon_pivot.stats.fire_rate
+		"player_speed":
+			player.speed += 20.0
+		"player_dash_speed":
+			player.dash_speed += 30.0
 	get_tree().paused = false
 	hide()
 
 
 func _on_upgrade_3_pressed() -> void:
-	player.speed += 20.0
+	var upgrade_id = current_choices[2]["id"]
+	
+	match upgrade_id:
+		"proj_speed":
+			player.weapon_pivot.stats.projectile_speed += 50.0
+		"damage":
+			player.weapon_pivot.stats.damage += 5.0
+			player.weapon_pivot.update_appearance()
+		"fire_rate":
+			player.weapon_pivot.stats.fire_rate = maxf(0.2, player.weapon_pivot.stats.fire_rate - 0.2)
+			player.weapon_timer.wait_time = player.weapon_pivot.stats.fire_rate
+		"player_speed":
+			player.speed += 20.0
+		"player_dash_speed":
+			player.dash_speed += 30.0
 	get_tree().paused = false
 	hide()
 
