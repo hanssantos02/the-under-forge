@@ -9,16 +9,28 @@ extends Node2D
 @onready var death_sfx: AudioStreamPlayer = $DeathSFX
 @onready var difficulty_timer: Timer = $DifficultyTimer
 @onready var game_over_menu: CanvasLayer = $GameOverMenu
+@onready var hud: CanvasLayer = $HUD
 var is_respawning: bool = false
 var minimum_spawn_time: float = 0.3
 var difficulty_level: int = 1
 var is_game_over: bool = false
+var survival_time: float
+
+func _process(delta: float) -> void:
+	survival_time += delta
+	var survival_seconds: int = int(survival_time)
+	var minutes = survival_seconds / 60
+	var seconds = survival_seconds % 60
+	var time_string: String = "%02d:%02d" % [minutes, seconds]
+	hud.update_time(time_string)
 
 func _on_player_died() -> void:
 	is_respawning = true
 	spawn_timer.stop()
 	difficulty_timer.stop()
 	death_sfx.play()
+	if not is_game_over:
+		hud.show_respawn_prompt(true)
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if is_respawning and event.is_action_pressed("ui_accept") and not is_game_over:
@@ -26,6 +38,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		spawn_timer.start()
 		spawn_timer.wait_time = minf(2.0, spawn_timer.wait_time + 0.5)
 		difficulty_timer.start()
+		hud.show_respawn_prompt(false)
 		var player = player_scene.instantiate()
 		player.global_position = Vector2.ZERO
 		player.has_weapon = false

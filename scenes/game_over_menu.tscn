@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://c2jj44f53job8" path="res://scripts/juicy_button.gd" id="2_ccgoi"]
 
 [node name="GameOverMenu" type="CanvasLayer" unique_id=1881348650]
+layer = 100
 visible = false
 script = ExtResource("1_ccgoi")
 

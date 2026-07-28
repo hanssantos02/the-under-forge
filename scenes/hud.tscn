@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://dfnac7yuybjp2"]
+
+[ext_resource type="Theme" uid="uid://dtybehsd5t4v1" path="res://resources/main_theme.tres" id="1_ahhtf"]
+[ext_resource type="Script" uid="uid://di00qrf0052b" path="res://scripts/hud.gd" id="1_oo0fn"]
+
+[node name="HUD" type="CanvasLayer" unique_id=1527224756]
+script = ExtResource("1_oo0fn")
+
+[node name="Control" type="Control" parent="." unique_id=676065047]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_ahhtf")
+
+[node name="TimerLabel" type="Label" parent="Control" unique_id=1505964514]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 18.0
+grow_horizontal = 2
+text = "00:00"
+
+[node name="ScoreLabel" type="Label" parent="Control" unique_id=132125669]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -60.0
+offset_bottom = 18.0
+grow_horizontal = 0
+text = "SCORE: 0"
+
+[node name="XPBar" type="ProgressBar" parent="Control" unique_id=1155843305]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -22.0
+offset_right = 2.0
+grow_horizontal = 2
+grow_vertical = 0
+show_percentage = false
+
+[node name="DashLabel" type="Label" parent="Control" unique_id=138816974]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -18.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "DASH READY!"
+
+[node name="InstructionsLabel" type="Label" parent="Control" unique_id=1532987077]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -53.5
+offset_top = -103.0
+offset_right = 53.5
+offset_bottom = -43.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "WASD to Move, 
+Mouse to Aim, 
+SHIFT to Dash"
+
+[node name="RespawnLabel" type="Label" parent="Control" unique_id=601927302]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = 29.0
+offset_right = 96.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "IT'S NOT OVER YET!
+PRESS 'SPACE' TO CONTINUE"
+horizontal_alignment = 1
