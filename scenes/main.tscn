@@ -71,6 +71,8 @@ bus = &"SFX"
 
 [node name="HUD" parent="." unique_id=1527224756 instance=ExtResource("10_choun")]
 
+[connection signal="dash_status_changed" from="Player" to="HUD" method="set_dash_ready"]
 [connection signal="tree_exited" from="Player" to="." method="_on_player_died"]
+[connection signal="xp_changed" from="Player" to="HUD" method="update_xp"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="DifficultyTimer" to="." method="_on_difficulty_timer_timeout"]

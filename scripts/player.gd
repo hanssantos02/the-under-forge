@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
 signal lineage_broken
+signal xp_changed(current: int, maximum: int)
+signal dash_status_changed(is_ready: bool)
 
 @export var speed: float = 100.0
 @export var dropped_weapon_scene: PackedScene
@@ -31,6 +33,8 @@ func _ready() -> void:
 		weapon_pivot.hide()
 		weapon_timer.stop()
 	camera_2d.make_current()
+	dash_status_changed.emit(true)
+	xp_changed.emit(experience, exp_to_next_level)
 	
 func equip_weapon(new_stats: WeaponStats) -> void:
 	weapon_pivot.stats = new_stats
@@ -45,6 +49,7 @@ func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("dash") and can_dash and direction != Vector2.ZERO:
 		is_dashing = true
 		can_dash = false
+		dash_status_changed.emit(false)
 		dash_direction = direction
 		dash_duration_timer.start()
 		dash_cooldown_timer.start()
@@ -86,10 +91,12 @@ func _on_dash_duration_timer_timeout() -> void:
 
 func _on_dash_cooldown_timer_timeout() -> void:
 	can_dash = true
+	dash_status_changed.emit(true)
 	
 
 func gain_xp(amount: int) -> void:
 	experience += amount
+	xp_changed.emit(experience, exp_to_next_level)
 	gem_sfx.play()
 	if experience >= exp_to_next_level:
 		level_up()

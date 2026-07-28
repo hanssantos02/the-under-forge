@@ -18,10 +18,14 @@ func update_score(score: int) -> void:
 	score_label.text = "SCORE: " + str(score)
 	
 func update_xp(current: int, maximum: int) -> void:
+	if not is_node_ready():
+		await ready
 	xp_bar.value = current
 	xp_bar.max_value = maximum
 	
 func set_dash_ready(is_ready: bool) -> void:
+	if not is_node_ready():
+		await ready
 	if is_ready:
 		dash_label.text = "DASH READY!"
 		dash_label.add_theme_color_override("font_color", Color.GREEN)

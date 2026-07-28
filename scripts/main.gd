@@ -46,6 +46,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		player.add_to_group("player")
 		player.tree_exited.connect(_on_player_died)
 		player.lineage_broken.connect(_on_lineage_broken)
+		player.dash_status_changed.connect(hud.set_dash_ready)
+		player.xp_changed.connect(hud.update_xp)
 
 func _on_spawn_timer_timeout() -> void:
 	var player = get_tree().get_first_node_in_group("player")
