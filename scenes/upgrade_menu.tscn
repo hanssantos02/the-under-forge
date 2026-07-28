@@ -75,6 +75,12 @@ size_flags_horizontal = 4
 text = "Agility"
 script = ExtResource("3_0e30j")
 
+[connection signal="mouse_entered" from="HBoxContainer/Upgrade1" to="." method="_on_upgrade_1_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/Upgrade1" to="." method="_on_mouse_exit"]
 [connection signal="pressed" from="HBoxContainer/Upgrade1" to="." method="_on_upgrade_1_pressed"]
+[connection signal="mouse_entered" from="HBoxContainer/Upgrade2" to="." method="_on_upgrade_2_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/Upgrade2" to="." method="_on_mouse_exit"]
 [connection signal="pressed" from="HBoxContainer/Upgrade2" to="." method="_on_upgrade_2_pressed"]
+[connection signal="mouse_entered" from="HBoxContainer/Upgrade3" to="." method="_on_upgrade_3_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/Upgrade3" to="." method="_on_mouse_exit"]
 [connection signal="pressed" from="HBoxContainer/Upgrade3" to="." method="_on_upgrade_3_pressed"]

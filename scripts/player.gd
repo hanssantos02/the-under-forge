@@ -101,6 +101,7 @@ func level_up() -> void:
 	level += 1
 	exp_to_next_level *= 1.5
 	get_tree().paused = true
+	upgrade_menu.setup_menu()
 	upgrade_menu.show()
 
 func _on_magnet_area_area_entered(area: Area2D) -> void:

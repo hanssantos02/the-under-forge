@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c58oe41xbr7l6"]
 
 [ext_resource type="Script" uid="uid://mh1d3fhpfdbb" path="res://scripts/enemy.gd" id="1_x5bun"]
-[ext_resource type="PackedScene" uid="uid://brye3pkbkraip" path="res://scenes/death_explosion.tscn" id="2_2f2qb"]
+[ext_resource type="PackedScene" uid="uid://bfjesv1ki5ba5" path="res://scenes/brute_explosion.tscn" id="2_x5bun"]
 [ext_resource type="PackedScene" uid="uid://7o4gj8js15f0" path="res://scenes/xp_gem.tscn" id="3_5srpn"]
 [ext_resource type="Texture2D" uid="uid://cqtepapdbvf1a" path="res://sprites/Brute.png" id="4_x5bun"]
 [ext_resource type="PackedScene" uid="uid://bi18c06iqljql" path="res://scenes/health_component.tscn" id="5_l8egu"]
@@ -20,7 +20,7 @@ collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_x5bun")
 speed = 30.0
-explosion_scene = ExtResource("2_2f2qb")
+explosion_scene = ExtResource("2_x5bun")
 xp_gem_scene = ExtResource("3_5srpn")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=941818271]
