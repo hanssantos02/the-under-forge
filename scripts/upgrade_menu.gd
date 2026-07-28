@@ -13,62 +13,32 @@ var upgrade_pool: Array = [{"id": "proj_speed", "title": "Swift Shot", "descript
 							{ "id": "player_dash_speed", "title": "Quick Step", "description": "Increases dash speed."}]
 var current_choices: Array = []
 
+func apply_upgrade(upgrade_id: String) -> void:
+	match upgrade_id:
+		"proj_speed":
+			player.weapon_pivot.stats.projectile_speed += 50.0
+		"damage":
+			player.weapon_pivot.stats.damage += 5.0
+		"fire_rate":
+			player.weapon_pivot.stats.fire_rate = maxf(0.2, player.weapon_pivot.stats.fire_rate - 0.2)
+			player.weapon_timer.wait_time = player.weapon_pivot.stats.fire_rate
+		"player_speed":
+			player.speed += 20.0
+		"player_dash_speed":
+			player.dash_speed += 30.0
+	get_tree().paused = false
+	hide()
+
 
 func _on_upgrade_1_pressed() -> void:
-	var upgrade_id = current_choices[0]["id"]
-	
-	match upgrade_id:
-		"proj_speed":
-			player.weapon_pivot.stats.projectile_speed += 50.0
-		"damage":
-			player.weapon_pivot.stats.damage += 5.0
-		"fire_rate":
-			player.weapon_pivot.stats.fire_rate = maxf(0.2, player.weapon_pivot.stats.fire_rate - 0.2)
-			player.weapon_timer.wait_time = player.weapon_pivot.stats.fire_rate
-		"player_speed":
-			player.speed += 20.0
-		"player_dash_speed":
-			player.dash_speed += 30.0
-	get_tree().paused = false
-	hide()
+	apply_upgrade(current_choices[0]["id"])
 
 func _on_upgrade_2_pressed() -> void:
-	var upgrade_id = current_choices[1]["id"]
-	
-	match upgrade_id:
-		"proj_speed":
-			player.weapon_pivot.stats.projectile_speed += 50.0
-		"damage":
-			player.weapon_pivot.stats.damage += 5.0
-		"fire_rate":
-			player.weapon_pivot.stats.fire_rate = maxf(0.2, player.weapon_pivot.stats.fire_rate - 0.2)
-			player.weapon_timer.wait_time = player.weapon_pivot.stats.fire_rate
-		"player_speed":
-			player.speed += 20.0
-		"player_dash_speed":
-			player.dash_speed += 30.0
-	get_tree().paused = false
-	hide()
+	apply_upgrade(current_choices[1]["id"])
 
 
 func _on_upgrade_3_pressed() -> void:
-	var upgrade_id = current_choices[2]["id"]
-	
-	match upgrade_id:
-		"proj_speed":
-			player.weapon_pivot.stats.projectile_speed += 50.0
-		"damage":
-			player.weapon_pivot.stats.damage += 5.0
-			player.weapon_pivot.update_appearance()
-		"fire_rate":
-			player.weapon_pivot.stats.fire_rate = maxf(0.2, player.weapon_pivot.stats.fire_rate - 0.2)
-			player.weapon_timer.wait_time = player.weapon_pivot.stats.fire_rate
-		"player_speed":
-			player.speed += 20.0
-		"player_dash_speed":
-			player.dash_speed += 30.0
-	get_tree().paused = false
-	hide()
+	apply_upgrade(current_choices[2]["id"])
 
 func setup_menu() -> void:
 	current_choices.clear()
@@ -79,9 +49,9 @@ func setup_menu() -> void:
 	upgrade_2.text = current_choices[1]["title"]
 	upgrade_3.text = current_choices[2]["title"]
 	description_label.text = ""
-
-func _on_upgrade_1_mouse_entered() -> void:
-	var upgrade_id = current_choices[0]["id"]
+	
+func show_description(choice_index: int) -> void:
+	var upgrade_id = current_choices[choice_index]["id"]
 	
 	var stat_label = ""
 	var stat_value = 0.0
@@ -101,56 +71,19 @@ func _on_upgrade_1_mouse_entered() -> void:
 		"player_dash_speed":
 			stat_label = "Current Dash Speed: "
 			stat_value = player.dash_speed
-	description_label.text = current_choices[0]["description"] + "\n" + stat_label + str(stat_value)
+	description_label.text = current_choices[choice_index]["description"] + "\n" + stat_label + str(stat_value)
+
+func _on_upgrade_1_mouse_entered() -> void:
+	show_description(0)
 	
 
 
 func _on_upgrade_2_mouse_entered() -> void:
-	var upgrade_id = current_choices[1]["id"]
-	
-	var stat_label = ""
-	var stat_value = 0.0
-	match upgrade_id:
-		"proj_speed":
-			stat_label = "Current Projectile Speed: "
-			stat_value = player.weapon_pivot.stats.projectile_speed
-		"damage":
-			stat_label = "Current Damage: "
-			stat_value = player.weapon_pivot.stats.damage
-		"fire_rate":
-			stat_label = "Current Fire Rate: "
-			stat_value = player.weapon_pivot.stats.fire_rate
-		"player_speed":
-			stat_label = "Current Player Speed: "
-			stat_value = player.speed
-		"player_dash_speed":
-			stat_label = "Current Dash Speed: "
-			stat_value = player.dash_speed
-	description_label.text = current_choices[1]["description"] + "\n" + stat_label + str(stat_value)
+	show_description(1)
 
 
 func _on_upgrade_3_mouse_entered() -> void:
-	var upgrade_id = current_choices[2]["id"]
-	
-	var stat_label = ""
-	var stat_value = 0.0
-	match upgrade_id:
-		"proj_speed":
-			stat_label = "Current Projectile Speed: "
-			stat_value = player.weapon_pivot.stats.projectile_speed
-		"damage":
-			stat_label = "Current Damage: "
-			stat_value = player.weapon_pivot.stats.damage
-		"fire_rate":
-			stat_label = "Current Fire Rate: "
-			stat_value = player.weapon_pivot.stats.fire_rate
-		"player_speed":
-			stat_label = "Current Player Speed: "
-			stat_value = player.speed
-		"player_dash_speed":
-			stat_label = "Current Dash Speed: "
-			stat_value = player.dash_speed
-	description_label.text = current_choices[2]["description"] + "\n" + stat_label + str(stat_value)
+	show_description(2)
 	
 func _on_mouse_exit() -> void:
 	description_label.text = ""
