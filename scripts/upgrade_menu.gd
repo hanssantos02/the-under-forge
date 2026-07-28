@@ -19,6 +19,7 @@ func apply_upgrade(upgrade_id: String) -> void:
 			player.weapon_pivot.stats.projectile_speed += 50.0
 		"damage":
 			player.weapon_pivot.stats.damage += 5.0
+			player.weapon_pivot.update_appearance()
 		"fire_rate":
 			player.weapon_pivot.stats.fire_rate = maxf(0.2, player.weapon_pivot.stats.fire_rate - 0.2)
 			player.weapon_timer.wait_time = player.weapon_pivot.stats.fire_rate
