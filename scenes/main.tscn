@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://dxqs2nbbmrw12" path="res://music/background_music.wav" id="5_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://c58oe41xbr7l6" path="res://scenes/brute_enemy.tscn" id="5_tipki"]
 [ext_resource type="AudioStream" uid="uid://xumw6ivu0lca" path="res://music/player_died.wav" id="6_tefeu"]
+[ext_resource type="PackedScene" uid="uid://pwet7h6ey36g" path="res://scenes/game_over_menu.tscn" id="9_85g3d"]
 
 [sub_resource type="Curve2D" id="Curve2D_sugp2"]
 _data = {
@@ -64,6 +65,8 @@ bus = &"BGM"
 [node name="DeathSFX" type="AudioStreamPlayer" parent="." unique_id=2030935121]
 stream = ExtResource("6_tefeu")
 bus = &"SFX"
+
+[node name="GameOverMenu" parent="." unique_id=1881348650 instance=ExtResource("9_85g3d")]
 
 [connection signal="tree_exited" from="Player" to="." method="_on_player_died"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://pwet7h6ey36g"]
+
+[ext_resource type="Script" uid="uid://dvwc7abhveclq" path="res://scripts/game_over_menu.gd" id="1_ccgoi"]
+[ext_resource type="Theme" uid="uid://dtybehsd5t4v1" path="res://resources/main_theme.tres" id="1_cwb3k"]
+[ext_resource type="Script" uid="uid://c2jj44f53job8" path="res://scripts/juicy_button.gd" id="2_ccgoi"]
+
+[node name="GameOverMenu" type="CanvasLayer" unique_id=1881348650]
+visible = false
+script = ExtResource("1_ccgoi")
+
+[node name="Control" type="Control" parent="." unique_id=2099182120]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_cwb3k")
+
+[node name="ColorRect" type="ColorRect" parent="Control" unique_id=709746900]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5882353)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=1890693300]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Control/VBoxContainer" unique_id=70480478]
+layout_mode = 2
+text = "LINEAGE BROKEN!"
+
+[node name="RetryButton" type="Button" parent="Control/VBoxContainer" unique_id=1686470815]
+layout_mode = 2
+text = "RETRY"
+script = ExtResource("2_ccgoi")
+
+[node name="MenuButton" type="Button" parent="Control/VBoxContainer" unique_id=1702228968]
+layout_mode = 2
+text = "MAIN MENU"
+script = ExtResource("2_ccgoi")
+
+[connection signal="pressed" from="Control/VBoxContainer/RetryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]

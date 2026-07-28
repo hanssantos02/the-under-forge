@@ -8,6 +8,7 @@ extends Node2D
 @onready var spawn_timer: Timer = $SpawnTimer
 @onready var death_sfx: AudioStreamPlayer = $DeathSFX
 @onready var difficulty_timer: Timer = $DifficultyTimer
+@onready var game_over_menu: CanvasLayer = $GameOverMenu
 var is_respawning: bool = false
 var minimum_spawn_time: float = 0.3
 var difficulty_level: int = 1
@@ -62,4 +63,5 @@ func _on_difficulty_timer_timeout() -> void:
 	
 func _on_lineage_broken() -> void:
 	is_game_over = true
-	print("GAME OVER!")
+	await get_tree().create_timer(1.0).timeout
+	game_over_menu.appear()
