@@ -7,7 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://dtsimitwtk5ya" path="res://scenes/swarmer_enemy.tscn" id="4_o6xl0"]
 [ext_resource type="AudioStream" uid="uid://dxqs2nbbmrw12" path="res://music/background_music.wav" id="5_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://c58oe41xbr7l6" path="res://scenes/brute_enemy.tscn" id="5_tipki"]
+[ext_resource type="PackedScene" uid="uid://cxnrlfhfhkv7x" path="res://scenes/boss.tscn" id="6_eb6dy"]
 [ext_resource type="AudioStream" uid="uid://xumw6ivu0lca" path="res://music/player_died.wav" id="6_tefeu"]
+[ext_resource type="PackedScene" uid="uid://c3phnbixk1dlg" path="res://scenes/arena_cage.tscn" id="7_trceg"]
 [ext_resource type="PackedScene" uid="uid://pwet7h6ey36g" path="res://scenes/game_over_menu.tscn" id="9_85g3d"]
 [ext_resource type="PackedScene" uid="uid://dfnac7yuybjp2" path="res://scenes/hud.tscn" id="10_choun"]
 
@@ -27,6 +29,8 @@ player_scene = ExtResource("2_sugp2")
 enemy_scene = ExtResource("3_sugp2")
 swarmer_scene = ExtResource("4_o6xl0")
 brute_scene = ExtResource("5_tipki")
+boss_scene = ExtResource("6_eb6dy")
+cage_scene = ExtResource("7_trceg")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=495847255]
 texture_repeat = 2

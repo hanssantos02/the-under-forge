@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://cxnrlfhfhkv7x"]
+
+[ext_resource type="Texture2D" uid="uid://lvlawnb0g3ak" path="res://sprites/boss.png" id="1_dlmty"]
+[ext_resource type="PackedScene" uid="uid://bi18c06iqljql" path="res://scenes/health_component.tscn" id="2_jncid"]
+[ext_resource type="PackedScene" uid="uid://c62w87grwbrgy" path="res://scenes/hitbox_component.tscn" id="3_qnbj4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6baej"]
+size = Vector2(22, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uu65c"]
+size = Vector2(24, 22)
+
+[node name="Boss" type="CharacterBody2D" unique_id=1155520623]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1819148851]
+texture = ExtResource("1_dlmty")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1828545806]
+shape = SubResource("RectangleShape2D_6baej")
+
+[node name="HealthComponent" parent="." unique_id=1323311277 instance=ExtResource("2_jncid")]
+max_health = 500.0
+
+[node name="HitboxComponent" parent="." unique_id=567847275 instance=ExtResource("3_qnbj4")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=1185600261]
+shape = SubResource("RectangleShape2D_uu65c")

@@ -41,9 +41,10 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="Control/VBoxContainer" unique_id=70480478]
+[node name="GameoverLabel" type="Label" parent="Control/VBoxContainer" unique_id=70480478]
 layout_mode = 2
 text = "LINEAGE BROKEN!"
+horizontal_alignment = 1
 
 [node name="RetryButton" type="Button" parent="Control/VBoxContainer" unique_id=1686470815]
 layout_mode = 2

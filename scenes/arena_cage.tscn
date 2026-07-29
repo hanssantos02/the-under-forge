@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://c3phnbixk1dlg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6baej"]
+size = Vector2(500, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uu65c"]
+size = Vector2(500, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_he4yp"]
+size = Vector2(20, 500)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h4jmg"]
+size = Vector2(20, 500)
+
+[node name="ArenaCage" type="Node2D" unique_id=341439408]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1862260935]
+collision_layer = 4
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1423193187]
+position = Vector2(0, -250)
+shape = SubResource("RectangleShape2D_6baej")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=40421355]
+position = Vector2(0, 250)
+shape = SubResource("RectangleShape2D_uu65c")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" unique_id=1118680835]
+position = Vector2(-250, 0)
+shape = SubResource("RectangleShape2D_he4yp")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D" unique_id=447710660]
+position = Vector2(250, 0)
+shape = SubResource("RectangleShape2D_h4jmg")
+
+[node name="Line2D" type="Line2D" parent="." unique_id=509936892]
+points = PackedVector2Array(-250, -250, 250, -250, 250, 250, -250, 250, -250, -250)
+width = 3.0
+default_color = Color(1.353256, 0.27491483, 0.27491483, 1)
+joint_mode = 1
