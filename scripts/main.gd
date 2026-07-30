@@ -20,7 +20,7 @@ var difficulty_level: int = 1
 var is_game_over: bool = false
 var survival_time: float
 var score: int = 0
-var next_boss_time: float = 10.0
+var next_boss_time: float = 120.0
 var is_boss_active: bool = false
 var cage_center: Vector2 = Vector2.ZERO
 var last_player_position: Vector2 = Vector2.ZERO
@@ -41,7 +41,7 @@ func _process(delta: float) -> void:
 	hud.update_time(time_string)
 	
 	if survival_time >= next_boss_time and not is_boss_active:
-		next_boss_time += 10.0
+		next_boss_time += 120.0
 		trigger_boss_warning()
 
 func _on_player_died() -> void:
