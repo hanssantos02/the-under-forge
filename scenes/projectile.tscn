@@ -20,4 +20,8 @@ texture = ExtResource("1_c8fcr")
 position = Vector2(2, 0)
 shape = SubResource("CapsuleShape2D_uu65c")
 
+[node name="Timer" type="Timer" parent="." unique_id=1796762161]
+wait_time = 3.0
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

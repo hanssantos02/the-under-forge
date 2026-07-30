@@ -4,8 +4,12 @@
 [ext_resource type="Script" uid="uid://bqx8d1fucetbp" path="res://scripts/boss.gd" id="1_qnbj4"]
 [ext_resource type="PackedScene" uid="uid://bi18c06iqljql" path="res://scenes/health_component.tscn" id="2_jncid"]
 [ext_resource type="PackedScene" uid="uid://dtsimitwtk5ya" path="res://scenes/swarmer_enemy.tscn" id="2_r3bxh"]
+[ext_resource type="PackedScene" uid="uid://daqgi4x8w7q5o" path="res://scenes/boss_projectile.tscn" id="3_2cdgk"]
 [ext_resource type="PackedScene" uid="uid://c62w87grwbrgy" path="res://scenes/hitbox_component.tscn" id="3_qnbj4"]
+[ext_resource type="PackedScene" uid="uid://7o4gj8js15f0" path="res://scenes/xp_gem.tscn" id="4_2avx2"]
+[ext_resource type="PackedScene" uid="uid://ffqhj5shpqtj" path="res://scenes/boss_explosion.tscn" id="5_5f346"]
 [ext_resource type="PackedScene" uid="uid://cfvyubwjo2md2" path="res://scenes/movement_animator.tscn" id="6_wqpjq"]
+[ext_resource type="AudioStream" uid="uid://deqesj080j7au" path="res://music/enemy_hit.wav" id="8_qsl3t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6baej"]
 size = Vector2(22, 20)
@@ -18,15 +22,26 @@ collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_qnbj4")
 swarmer_scene = ExtResource("2_r3bxh")
+projectile_scene = ExtResource("3_2cdgk")
+xp_gem_scene = ExtResource("4_2avx2")
+explosion_scene = ExtResource("5_5f346")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1819148851]
+clip_children = 2
 texture = ExtResource("1_dlmty")
+
+[node name="FlashRect" type="ColorRect" parent="Sprite2D" unique_id=451483248]
+modulate = Color(1, 1, 1, 0)
+offset_left = -12.0
+offset_top = -11.0
+offset_right = 12.0
+offset_bottom = 11.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1828545806]
 shape = SubResource("RectangleShape2D_6baej")
 
 [node name="HealthComponent" parent="." unique_id=1323311277 instance=ExtResource("2_jncid")]
-max_health = 500.0
+max_health = 20.0
 
 [node name="HitboxComponent" parent="." unique_id=567847275 instance=ExtResource("3_qnbj4")]
 
@@ -34,7 +49,7 @@ max_health = 500.0
 shape = SubResource("RectangleShape2D_uu65c")
 
 [node name="StateTimer" type="Timer" parent="." unique_id=68399464]
-wait_time = 3.0
+wait_time = 5.0
 autostart = true
 
 [node name="WarningLine" type="Line2D" parent="." unique_id=378472977]
@@ -46,4 +61,10 @@ default_color = Color(1, 0, 0, 0)
 sprite = NodePath("../Sprite2D")
 character = NodePath("..")
 
+[node name="HitSFX" type="AudioStreamPlayer2D" parent="." unique_id=435652401]
+stream = ExtResource("8_qsl3t")
+bus = &"SFX"
+
+[connection signal="damaged" from="HealthComponent" to="." method="_on_damaged"]
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="timeout" from="StateTimer" to="." method="_on_state_timer_timeout"]

@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://daqgi4x8w7q5o"]
+
+[ext_resource type="Script" uid="uid://beo5p1meememo" path="res://scripts/boss_projectile.gd" id="1_6ienu"]
+[ext_resource type="Texture2D" uid="uid://caj1vynvmoi5o" path="res://sprites/boss_projectile.png" id="1_h0i0c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uu65c"]
+size = Vector2(11, 9)
+
+[node name="BossProjectile" type="Area2D" unique_id=2102426089]
+collision_layer = 0
+collision_mask = 5
+script = ExtResource("1_6ienu")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1344913784]
+texture = ExtResource("1_h0i0c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1753635508]
+position = Vector2(0.5, -0.5)
+shape = SubResource("RectangleShape2D_uu65c")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

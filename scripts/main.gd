@@ -6,12 +6,14 @@ extends Node2D
 @export var brute_scene: PackedScene
 @export var boss_scene: PackedScene
 @export var cage_scene: PackedScene
+
 @onready var spawn_location: PathFollow2D = $SpawnPath/SpawnLocation
 @onready var spawn_timer: Timer = $SpawnTimer
 @onready var death_sfx: AudioStreamPlayer = $DeathSFX
 @onready var difficulty_timer: Timer = $DifficultyTimer
 @onready var game_over_menu: CanvasLayer = $GameOverMenu
 @onready var hud: CanvasLayer = $HUD
+
 var is_respawning: bool = false
 var minimum_spawn_time: float = 0.3
 var difficulty_level: int = 1
@@ -23,14 +25,17 @@ var is_boss_active: bool = false
 var cage_center: Vector2 = Vector2.ZERO
 
 func _process(delta: float) -> void:
-	survival_time += delta
+	if not is_boss_active:
+		survival_time += delta
+		
 	var survival_seconds: int = int(survival_time)
 	var minutes = survival_seconds / 60
 	var seconds = survival_seconds % 60
 	var time_string: String = "%02d:%02d" % [minutes, seconds]
 	hud.update_time(time_string)
-	if survival_time >= next_boss_time:
-		next_boss_time += 120.0
+	
+	if survival_time >= next_boss_time and not is_boss_active:
+		next_boss_time += 10.0
 		start_boss_fight()
 
 func _on_player_died() -> void:
@@ -117,7 +122,16 @@ func start_boss_fight() -> void:
 	var cage = cage_scene.instantiate()
 	cage.global_position = player.global_position
 	get_tree().current_scene.add_child(cage)
+	cage.add_to_group("cage")
 	
 	var boss = boss_scene.instantiate()
 	boss.global_position = player.global_position + Vector2(0,-150)
+	boss.boss_died.connect(_on_boss_defeated)
 	get_tree().current_scene.add_child(boss)
+	boss.add_to_group("enemy")
+
+func _on_boss_defeated() -> void:
+	for cage in get_tree().get_nodes_in_group("cage"):
+		cage.queue_free()
+	is_boss_active = false
+	spawn_timer.start()
