@@ -23,6 +23,7 @@ func _on_timer_timeout() -> void:
 	projectile.speed = stats.projectile_speed
 	projectile.damage = stats.damage
 	projectile.global_position = muzzle_point.global_position
+	projectile.look_at(get_global_mouse_position())
 	projectile.global_rotation = global_rotation
 	camera_2d.apply_shake(0.5)
 	get_tree().current_scene.add_child(projectile)

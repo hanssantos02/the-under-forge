@@ -38,12 +38,22 @@ func _ready() -> void:
 	dash_status_changed.emit(true)
 	xp_changed.emit(experience, exp_to_next_level)
 	
+	var tween = create_tween()
+	scale = Vector2.ZERO
+	tween.tween_property(self, "scale", Vector2.ONE, 0.3).set_trans(Tween.TRANS_BACK)
+	
 func equip_weapon(new_stats: WeaponStats) -> void:
 	weapon_pivot.stats = new_stats
 	weapon_pivot.show()
+	weapon_timer.wait_time = new_stats.fire_rate
 	weapon_timer.start()
 	weapon_pivot.update_appearance()
 	has_weapon = true
+	
+	level = new_stats.level
+	exp_to_next_level = new_stats.exp_to_next_level
+	xp_changed.emit(experience, exp_to_next_level)
+	
 	pickup_sfx.play()
 
 func _physics_process(_delta: float) -> void:
@@ -110,10 +120,15 @@ func level_up() -> void:
 	experience -= exp_to_next_level
 	level += 1
 	exp_to_next_level *= 1.5
+	
+	if has_weapon:
+		weapon_pivot.stats.level = level
+		weapon_pivot.stats.exp_to_next_level = exp_to_next_level
+		
 	get_tree().paused = true
 	upgrade_menu.setup_menu()
 	upgrade_menu.show()
 
 func _on_magnet_area_area_entered(area: Area2D) -> void:
-	if area.has_method("fly_towards"):
+	if area.has_method("fly_towards") and has_weapon:
 		area.fly_towards(self)

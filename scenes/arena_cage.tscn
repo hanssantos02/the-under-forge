@@ -37,5 +37,5 @@ shape = SubResource("RectangleShape2D_h4jmg")
 [node name="Line2D" type="Line2D" parent="." unique_id=509936892]
 points = PackedVector2Array(-250, -250, 250, -250, 250, 250, -250, 250, -250, -250)
 width = 3.0
-default_color = Color(1.353256, 0.27491483, 0.27491483, 1)
+default_color = Color(1.8247963, 0.38538346, 0.38538346, 1)
 joint_mode = 1

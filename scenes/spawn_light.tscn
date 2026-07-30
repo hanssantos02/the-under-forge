@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bs8ercllyx8pn"]
+
+[ext_resource type="Script" uid="uid://bs8vey0ench4v" path="res://scripts/spawn_light.gd" id="1_3wni8"]
+
+[node name="SpawnLight" type="Node2D" unique_id=1609986667]
+script = ExtResource("1_3wni8")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1285070918]
+custom_minimum_size = Vector2(20, 600)
+offset_left = -10.0
+offset_top = -600.0
+offset_right = 30.0
+color = Color(1.8247963, 1.8247963, 1.8247963, 1)

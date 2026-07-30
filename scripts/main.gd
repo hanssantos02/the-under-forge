@@ -6,6 +6,7 @@ extends Node2D
 @export var brute_scene: PackedScene
 @export var boss_scene: PackedScene
 @export var cage_scene: PackedScene
+@export var spawn_light_scene: PackedScene
 
 @onready var spawn_location: PathFollow2D = $SpawnPath/SpawnLocation
 @onready var spawn_timer: Timer = $SpawnTimer
@@ -76,6 +77,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 		
 		get_tree().current_scene.add_child(player)
+		var spawn_light = spawn_light_scene.instantiate()
+		spawn_light.global_position = player.global_position
+		get_tree().current_scene.call_deferred("add_child", spawn_light)
 		player.add_to_group("player")
 		player.tree_exited.connect(_on_player_died)
 		player.lineage_broken.connect(_on_lineage_broken)
@@ -136,7 +140,7 @@ func start_boss_fight() -> void:
 	boss.boss_died.connect(_on_boss_defeated)
 	get_tree().current_scene.add_child(boss)
 	boss.add_to_group("boss")
-	var extra_health = bosses_defeated * 100.0
+	var extra_health = bosses_defeated * 500.0
 	boss.health_component.max_health += extra_health
 	boss.health_component.current_health = boss.health_component.max_health
 
