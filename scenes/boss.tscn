@@ -1,8 +1,11 @@
 [gd_scene format=3 uid="uid://cxnrlfhfhkv7x"]
 
 [ext_resource type="Texture2D" uid="uid://lvlawnb0g3ak" path="res://sprites/boss.png" id="1_dlmty"]
+[ext_resource type="Script" uid="uid://bqx8d1fucetbp" path="res://scripts/boss.gd" id="1_qnbj4"]
 [ext_resource type="PackedScene" uid="uid://bi18c06iqljql" path="res://scenes/health_component.tscn" id="2_jncid"]
+[ext_resource type="PackedScene" uid="uid://dtsimitwtk5ya" path="res://scenes/swarmer_enemy.tscn" id="2_r3bxh"]
 [ext_resource type="PackedScene" uid="uid://c62w87grwbrgy" path="res://scenes/hitbox_component.tscn" id="3_qnbj4"]
+[ext_resource type="PackedScene" uid="uid://cfvyubwjo2md2" path="res://scenes/movement_animator.tscn" id="6_wqpjq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6baej"]
 size = Vector2(22, 20)
@@ -11,6 +14,10 @@ size = Vector2(22, 20)
 size = Vector2(24, 22)
 
 [node name="Boss" type="CharacterBody2D" unique_id=1155520623]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_qnbj4")
+swarmer_scene = ExtResource("2_r3bxh")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1819148851]
 texture = ExtResource("1_dlmty")
@@ -25,3 +32,18 @@ max_health = 500.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=1185600261]
 shape = SubResource("RectangleShape2D_uu65c")
+
+[node name="StateTimer" type="Timer" parent="." unique_id=68399464]
+wait_time = 3.0
+autostart = true
+
+[node name="WarningLine" type="Line2D" parent="." unique_id=378472977]
+points = PackedVector2Array(0, 0, 0, 0)
+width = 5.0
+default_color = Color(1, 0, 0, 0)
+
+[node name="MovementAnimator" parent="." unique_id=853006593 node_paths=PackedStringArray("sprite", "character") instance=ExtResource("6_wqpjq")]
+sprite = NodePath("../Sprite2D")
+character = NodePath("..")
+
+[connection signal="timeout" from="StateTimer" to="." method="_on_state_timer_timeout"]
