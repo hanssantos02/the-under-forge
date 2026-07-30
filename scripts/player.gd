@@ -32,6 +32,8 @@ func _ready() -> void:
 	if not has_weapon:
 		weapon_pivot.hide()
 		weapon_timer.stop()
+	else:
+		weapon_pivot.stats = weapon_pivot.stats.duplicate()
 	camera_2d.make_current()
 	dash_status_changed.emit(true)
 	xp_changed.emit(experience, exp_to_next_level)
@@ -69,6 +71,7 @@ func _on_health_component_died() -> void:
 		weapon.stats = weapon_pivot.stats
 		weapon.global_position = global_position
 		get_tree().current_scene.call_deferred("add_child", weapon)
+		weapon.add_to_group("dropped_weapon")
 		camera_2d.call_deferred("reparent",weapon)
 		var sacrifice = sacrifice_scene.instantiate()
 		sacrifice.global_position = global_position

@@ -60,10 +60,14 @@ func _unhandled_input(event: InputEvent) -> void:
 		var player = player_scene.instantiate()
 		player.has_weapon = false
 		
+		for enemy in get_tree().get_nodes_in_group("enemy"):
+			enemy.queue_free()
+		
 		if is_boss_active:
 			player.global_position = cage_center
 		else:
-			player.global_position = Vector2.ZERO
+			var weapon = get_tree().get_first_node_in_group("dropped_weapon")
+			player.global_position = weapon.global_position + Vector2(randf_range(-500, 500), randf_range(-500, 500))
 			spawn_timer.start()
 			spawn_timer.wait_time = minf(2.0, spawn_timer.wait_time + 0.5)
 			difficulty_level = 1
@@ -131,8 +135,8 @@ func start_boss_fight() -> void:
 	boss.global_position = cage_center + Vector2(0,-150)
 	boss.boss_died.connect(_on_boss_defeated)
 	get_tree().current_scene.add_child(boss)
-	boss.add_to_group("enemy")
-	var extra_health = bosses_defeated * 20.0
+	boss.add_to_group("boss")
+	var extra_health = bosses_defeated * 100.0
 	boss.health_component.max_health += extra_health
 	boss.health_component.current_health = boss.health_component.max_health
 
