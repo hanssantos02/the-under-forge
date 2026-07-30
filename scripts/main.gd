@@ -23,8 +23,14 @@ var score: int = 0
 var next_boss_time: float = 10.0
 var is_boss_active: bool = false
 var cage_center: Vector2 = Vector2.ZERO
+var last_player_position: Vector2 = Vector2.ZERO
+var bosses_defeated: int = 0
 
 func _process(delta: float) -> void:
+	var player = get_tree().get_first_node_in_group("player")
+	if player != null:
+		last_player_position = player.global_position
+		
 	if not is_boss_active:
 		survival_time += delta
 		
@@ -36,7 +42,7 @@ func _process(delta: float) -> void:
 	
 	if survival_time >= next_boss_time and not is_boss_active:
 		next_boss_time += 10.0
-		start_boss_fight()
+		trigger_boss_warning()
 
 func _on_player_died() -> void:
 	is_respawning = true
@@ -110,28 +116,44 @@ func on_enemy_died() -> void:
 	hud.update_score(score)
 	
 func start_boss_fight() -> void:
-	spawn_timer.stop()
-	var player = get_tree().get_first_node_in_group("player")
 	
-	is_boss_active = true
-	cage_center = player.global_position
+	cage_center = last_player_position
 	
 	for enemy in get_tree().get_nodes_in_group("enemy"):
 		enemy.queue_free()
 		
 	var cage = cage_scene.instantiate()
-	cage.global_position = player.global_position
+	cage.global_position = cage_center
 	get_tree().current_scene.add_child(cage)
 	cage.add_to_group("cage")
 	
 	var boss = boss_scene.instantiate()
-	boss.global_position = player.global_position + Vector2(0,-150)
+	boss.global_position = cage_center + Vector2(0,-150)
 	boss.boss_died.connect(_on_boss_defeated)
 	get_tree().current_scene.add_child(boss)
 	boss.add_to_group("enemy")
+	var extra_health = bosses_defeated * 20.0
+	boss.health_component.max_health += extra_health
+	boss.health_component.current_health = boss.health_component.max_health
 
 func _on_boss_defeated() -> void:
+	bosses_defeated += 1
 	for cage in get_tree().get_nodes_in_group("cage"):
 		cage.queue_free()
 	is_boss_active = false
 	spawn_timer.start()
+
+func trigger_boss_warning() -> void:
+	is_boss_active = true
+	spawn_timer.stop()
+	
+	hud.show_boss_warning()
+	
+	await get_tree().create_timer(3.0).timeout
+	
+	if is_game_over:
+		return
+		
+	start_boss_fight()
+	
+	

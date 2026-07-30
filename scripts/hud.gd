@@ -6,6 +6,8 @@ extends CanvasLayer
 @onready var instructions_label: Label = $Control/InstructionsLabel
 @onready var respawn_label: Label = $Control/RespawnLabel
 @onready var xp_bar: ProgressBar = $Control/XPBar
+@onready var boss_warning_label: Label = $Control/BossWarningLabel
+@onready var warning_sfx: AudioStreamPlayer = $WarningSFX
 
 func _ready() -> void:
 	var tween = create_tween()
@@ -44,3 +46,9 @@ func show_respawn_prompt(show_prompt: bool) -> void:
 		tween. tween_property(respawn_label, "modulate:a", 1.0, 1.0)
 	else:
 		respawn_label.hide()
+
+func show_boss_warning() -> void:
+	var tween = create_tween().set_loops(3)
+	tween.tween_property(boss_warning_label, "modulate:a", 1.0, 0.5)
+	tween.tween_property(boss_warning_label, "modulate:a", 0.0, 0.5)
+	warning_sfx.play()

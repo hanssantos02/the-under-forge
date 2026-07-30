@@ -2,6 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://dtybehsd5t4v1" path="res://resources/main_theme.tres" id="1_ahhtf"]
 [ext_resource type="Script" uid="uid://di00qrf0052b" path="res://scripts/hud.gd" id="1_oo0fn"]
+[ext_resource type="AudioStream" uid="uid://s1n3tmq8dpd4" path="res://music/boss_warning.wav" id="3_5ysmq"]
 
 [node name="HUD" type="CanvasLayer" unique_id=1527224756]
 script = ExtResource("1_oo0fn")
@@ -98,3 +99,25 @@ grow_vertical = 2
 text = "IT'S NOT OVER YET!
 PRESS 'SPACE' TO CONTINUE"
 horizontal_alignment = 1
+
+[node name="BossWarningLabel" type="Label" parent="Control" unique_id=2010050191]
+modulate = Color(1, 0, 0, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -103.0
+offset_top = -9.0
+offset_right = 103.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 50
+text = "WARNING! ANCESTRAL WRAITH"
+
+[node name="WarningSFX" type="AudioStreamPlayer" parent="." unique_id=516342634]
+stream = ExtResource("3_5ysmq")
+bus = &"SFX"
