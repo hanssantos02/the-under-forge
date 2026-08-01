@@ -11,6 +11,7 @@ signal dash_status_changed(is_ready: bool)
 @export var has_weapon: bool = true
 @export var dash_speed: float = 400.0
 @onready var weapon_pivot: Node2D = $WeaponPivot
+@onready var character_sprite: Sprite2D = $CharacterSprite
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var weapon_timer: Timer = $WeaponPivot/WeaponTimer
 @onready var pickup_sfx: AudioStreamPlayer = $PickupSFX
@@ -39,9 +40,10 @@ func _ready() -> void:
 	xp_changed.emit(experience, exp_to_next_level)
 	
 	var tween = create_tween()
-	scale = Vector2.ZERO
-	tween.tween_property(self, "scale", Vector2.ONE, 0.3).set_trans(Tween.TRANS_BACK)
-	
+	character_sprite.scale = Vector2.ZERO
+	weapon_pivot.scale = Vector2.ZERO
+	tween.tween_property(character_sprite, "scale", Vector2.ONE, 0.3).set_trans(Tween.TRANS_BACK)
+	tween.parallel().tween_property(weapon_pivot, "scale", Vector2.ONE, 0.3).set_trans(Tween.TRANS_BACK)
 func equip_weapon(new_stats: WeaponStats) -> void:
 	weapon_pivot.stats = new_stats
 	weapon_pivot.show()

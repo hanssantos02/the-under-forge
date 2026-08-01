@@ -38,7 +38,7 @@ shatter_scene = ExtResource("4_i4ail")
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_6baej")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1574654748]
+[node name="CharacterSprite" type="Sprite2D" parent="." unique_id=1574654748]
 texture = ExtResource("1_3vyb7")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1453979205]
@@ -71,7 +71,7 @@ volume_db = -7.0
 bus = &"SFX"
 
 [node name="MovementAnimator" parent="." unique_id=853006593 node_paths=PackedStringArray("sprite", "character") instance=ExtResource("10_y4r1p")]
-sprite = NodePath("../Sprite2D")
+sprite = NodePath("../CharacterSprite")
 character = NodePath("..")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1106264876]

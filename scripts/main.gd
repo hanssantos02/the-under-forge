@@ -61,8 +61,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		var player = player_scene.instantiate()
 		player.has_weapon = false
 		
-		for enemy in get_tree().get_nodes_in_group("enemy"):
-			enemy.queue_free()
+		clear_all_enemies()
 		
 		if is_boss_active:
 			player.global_position = cage_center
@@ -127,8 +126,7 @@ func start_boss_fight() -> void:
 	
 	cage_center = last_player_position
 	
-	for enemy in get_tree().get_nodes_in_group("enemy"):
-		enemy.queue_free()
+	clear_all_enemies()
 		
 	var cage = cage_scene.instantiate()
 	cage.global_position = cage_center
@@ -164,4 +162,9 @@ func trigger_boss_warning() -> void:
 		
 	start_boss_fight()
 	
-	
+func clear_all_enemies() -> void:
+	for enemy in get_tree().get_nodes_in_group("enemy"):
+		if enemy.tree_exited.is_connected(on_enemy_died):
+			enemy.tree_exited.disconnect(on_enemy_died)
+			
+			enemy.queue_free()

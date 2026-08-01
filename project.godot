@@ -13,7 +13,8 @@ config_version=5
 config/name="The Under-Forge"
 run/main_scene="uid://bya584erkjs0k"
 config/features=PackedStringArray("4.7", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://cn2cdgrhyy0qe"
+config/windows_native_icon="res://sprites/heirloom_icon.ico"
 
 [autoload]
 
